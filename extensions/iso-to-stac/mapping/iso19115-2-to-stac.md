@@ -40,7 +40,7 @@ standards and to other community efforts in the same space.
 | --- | --- | --- | --- | --- |
 | **MANDATORY** | Title | `title` | Collection | core |
 | **Needed** | Citation | `sci:citation` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
-| Optional | Citation Identifier (when DOI) | `sci:doi` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
+| **MANDATORY** | Citation Identifier (when DOI) | `sci:doi` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
 | Optional | Citation Edition | `version` | Collection | [Versioning Indicators](https://github.com/stac-extensions/version) |
 | **MANDATORY** | Description | `description` | Collection | core |
 | **Needed** | Theme Keywords | `keywords` | Collection | core |
