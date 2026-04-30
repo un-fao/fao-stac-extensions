@@ -17,8 +17,17 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
   top-level `proj:epsg` carrying the tile's native UTM zone, per the
   FAO STAC change report.
 - `examples/README.md` indexing every worked example.
+- `fao:product_type` enum tightened to `mapset` / `mosaic` /
+  `mosaicset` / `map`. `dataset` removed (catch-all not used by the
+  FAO platform); `map` added as the typical Item-level value (an Item
+  inside a `mapset` Collection is itself a single map). The schema
+  already allowed `fao:product_type` at Item level; this closes the
+  enum.
 
 ### Changed
+
+- All Item examples now carry `fao:product_type: "map"` to demonstrate
+  the convention.
 
 ### Deprecated
 

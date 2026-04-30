@@ -32,6 +32,7 @@
     "fao:workspace": "WAPOR-3",
     "fao:product_id": "L3-RSM-D.KOG",
     "fao:item_code": "WAPOR-3.L3-RSM-D.KOG.2025-12-D3",
+    "fao:product_type": "map",
     "proj:code": "EPSG:32637",
     "proj:bbox": [279800.0, 1250240.0, 310620.0, 1277540.0],
     "proj:transform": [279800.0, 20.0, 0.0, 1277540.0, 0.0, -20.0],

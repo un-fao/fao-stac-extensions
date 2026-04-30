@@ -35,6 +35,7 @@
     "fao:workspace": "ASIS",
     "fao:product_id": "ASI-D",
     "fao:item_code": "ASIS.ASI-D.2026-04-D2.GS2.LC-G",
+    "fao:product_type": "map",
     "iso:spatial_representation_type": "grid",
     "iso:status": "onGoing",
     "proj:code": "EPSG:4326",

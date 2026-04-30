@@ -52,7 +52,7 @@ The fields below can appear in:
 | fao:product_id | string | shared | FAO product identifier within the workspace. Typically equals the Collection id. |
 | fao:item_code | string | Item only | Per-item leaf code. Typically equals the Item id. |
 | fao:layer_id | string | Collection only | Service-agnostic FAO layer reference for provenance tracking. |
-| fao:product_type | string (enum) | RASTER ONLY | `mapset` \| `mosaic` \| `mosaicset` \| `dataset`. |
+| fao:product_type | string (enum) | RASTER ONLY | `mapset` \| `mosaic` \| `mosaicset` \| `map`. Item-level value is typically `map` (an Item inside a `mapset` Collection is itself a single map). |
 | fao:geometry_type | string | VECTOR ONLY | OGR/GeoJSON geometry type (`Point`, `Polygon`, `MultiPolygon`, …). |
 | fao:feature_count | integer ≥ 0 | VECTOR ONLY | Number of features in the layer (Collection) or item (Item). |
 

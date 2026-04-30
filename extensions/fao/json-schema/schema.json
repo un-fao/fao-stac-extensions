@@ -95,8 +95,8 @@
         },
         "fao:product_type": {
           "type": "string",
-          "enum": ["mapset", "mosaic", "mosaicset", "dataset"],
-          "description": "RASTER ONLY. FAO product-type classifier. mapset = single-tile collection of related rasters; mosaic = multi-tile composite; mosaicset = multi-tile composite organised by tile; dataset = miscellaneous. Vector collections MUST NOT set this field."
+          "enum": ["mapset", "mosaic", "mosaicset", "map"],
+          "description": "RASTER ONLY. FAO product-type classifier. mapset = single-tile Collection of related maps; mosaic = per-tile Collection of a multi-tile composite; mosaicset = per-tile Collection of a multi-tile composite organised by tile; map = a single static raster (typical Item-level value, including Items inside a mapset Collection). Vector collections MUST NOT set this field."
         },
         "fao:geometry_type": {
           "type": "string",
