@@ -39,13 +39,13 @@ standards and to other community efforts in the same space.
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
 | **MANDATORY** | Title | `title` | Collection | core |
-| **MANDATORY** | Citation | `sci:citation` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
+| **Needed** | Citation | `sci:citation` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
 | Optional | Citation Identifier (when DOI) | `sci:doi` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
 | Optional | Citation Edition | `version` | Collection | [Versioning Indicators](https://github.com/stac-extensions/version) |
 | **MANDATORY** | Description | `description` | Collection | core |
-| **MANDATORY** | Theme Keywords | `keywords` | Collection | core |
-| **MANDATORY** | Temporal Keywords | `keywords` | Collection | core |
-| **MANDATORY** | Place Keywords | `keywords` | Collection | core |
+| **Needed** | Theme Keywords | `keywords` | Collection | core |
+| **Needed** | Temporal Keywords | `keywords` | Collection | core |
+| **Needed** | Place Keywords | `keywords` | Collection | core |
 | **MANDATORY** | Topic Category | `themes` (with `scheme` set to ISO topic category codelist URI) | Collection | [Themes](https://github.com/stac-extensions/themes) |
 | **MANDATORY** | Language (resource — primary) | `language` | Collection | [Language](https://github.com/stac-extensions/language) |
 | Optional | Language (resource — additional) | `languages[]` | Collection | [Language](https://github.com/stac-extensions/language) |
@@ -79,7 +79,7 @@ date types that apply.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **Needed** | Maintenance and Update Frequency | `iso:maintenance_and_update_frequency` | Collection | this |
+| **MANDATORY** | Maintenance and Update Frequency | `iso:maintenance_and_update_frequency` | Collection | this |
 | Optional | Status | `iso:status` | Collection | this |
 
 (Purpose is in section 1.)
@@ -98,10 +98,10 @@ date types that apply.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Geographical Extent — Bounding Box | `extent.spatial.bbox` | Collection / Item | core |
-| **MANDATORY** | Temporal Extent — Begin / End date | `extent.temporal.interval` | Collection | core |
+| **Needed** | Geographical Extent — Bounding Box | `extent.spatial.bbox` | Collection / Item | core |
+| **Needed** | Temporal Extent — Begin / End date | `extent.temporal.interval` | Collection | core |
 | Optional | Vertical Extent — Min / Max | `cube:dimensions.z.extent` | Collection | [Datacube](https://github.com/stac-extensions/datacube) |
-| **MANDATORY** | Spatial Resolution — Distance and Unit | `raster:bands[].spatial_resolution` (or `gsd` from EO) | Item | [Raster](https://github.com/stac-extensions/raster) / [EO](https://github.com/stac-extensions/eo) |
+| **Needed** | Spatial Resolution — Distance and Unit | `raster:bands[].spatial_resolution` (or `gsd` from EO) | Item | [Raster](https://github.com/stac-extensions/raster) / [EO](https://github.com/stac-extensions/eo) |
 | Optional | Spatial Resolution — Scale denominator | `raster:bands[].spatial_resolution` (or `gsd` from EO) | Item | Raster / EO |
 
 ## 6. Distribution & Resources
@@ -113,7 +113,7 @@ sub-rows describe the body of each entry.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Distribution format | _(Asset)_ | Asset | core (`assets[].type`) |
+| **Needed** | Distribution format | _(Asset)_ | Asset | core (`assets[].type`) |
 | Optional | Distribution format — Name | _(Asset)_ | Asset | core (`assets[].title`) |
 
 ### 6.1. Data for download
@@ -165,7 +165,7 @@ sub-rows describe the body of each entry.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Data Quality — Lineage — Statement Description | `processing:lineage` (preferred); `iso:lineage_statement` (fallback) | Collection or Provider | [Processing](https://github.com/stac-extensions/processing) |
+| **Needed** | Data Quality — Lineage — Statement Description | `processing:lineage` (preferred); `iso:lineage_statement` (fallback) | Collection or Provider | [Processing](https://github.com/stac-extensions/processing) |
 
 > **Important — `processing:lineage` is the canonical home for ISO lineage
 > statements.** The STAC Processing extension explicitly cites
@@ -215,9 +215,9 @@ resource point of contact.
 | --- | --- | --- | --- | --- |
 | **MANDATORY** | Metadata Contact / Point of Contact | `providers[]` | `contacts[]` | Collection |
 | **MANDATORY** | Organization name | `providers[].name` | `contacts[].organization` | Collection |
-| **MANDATORY** | Individual name | `providers[].name` | `contacts[].name` | Collection |
+| **Needed** | Individual name | `providers[].name` | `contacts[].name` | Collection |
 | **MANDATORY** | Role | `providers[].roles[]` | `contacts[].roles[]` | Collection |
-| **MANDATORY** | Electronic mail address | `providers[].description` (FAO workaround) | `contacts[].emails[].value` | Collection |
+| **Needed** | Electronic mail address | `providers[].description` (FAO workaround) | `contacts[].emails[].value` | Collection |
 | Not needed | Address | _no STAC core equivalent — drop_ | `contacts[].addresses[]` | Collection |
 | Not needed | URL | `providers[].url` | `contacts[].links[]` (`rel=about`) | Collection |
 
