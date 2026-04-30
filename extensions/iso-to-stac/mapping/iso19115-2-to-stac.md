@@ -1,13 +1,19 @@
 # ISO 19115-1 ↔ STAC Mapping (FAO Profile)
 
-Normative mapping table for the FAO ISO 19115-1 profile, derived from
-the source spreadsheet (`ISO19115 vs STAC_Collection_300426_v2.xlsx`).
+Normative mapping table for the FAO ISO 19115-1 profile.
+
+This table is the per-field crosswalk that lets an FAO ISO 19115-1
+metadata record be merged into a STAC Collection / Item without
+information loss: every ISO field used by the FAO profile resolves
+either to a STAC core field, to a field contributed by an existing
+community extension, or to an `iso:*` field defined by this extension
+(only when no upstream extension covers the ISO concept).
 
 ## Reading the table
 
 | Column | Meaning |
 | --- | --- |
-| **Profile** | Required-ness in the FAO ISO 19115-1 profile. **MANDATORY** = red in the spreadsheet (must be present). **Needed** = required by the FAO profile, not by ISO. **Optional** = optional in both. **One of** = pick one of the rows that follow. |
+| **Profile** | Required-ness in the FAO ISO 19115-1 profile. **MANDATORY** = mandatory in both ISO and the profile (must be present). **Needed** = required by the FAO profile, not by ISO. **Optional** = optional in both. **One of** = pick one of the rows that follow. |
 | **ISO 19115-1 Field** | The ISO field name. |
 | **STAC Field** | Target STAC location. `iso:*` fields are defined by this extension; `fao:*` fields are defined by the [`fao`](../../fao/) extension; everything else is STAC core or contributed by the named extension. |
 | **Level** | Where the field lives: `Catalog`, `Collection`, `Item`, `Asset`, `Link`. |
@@ -163,9 +169,8 @@ for each are in [`../README.md`](../README.md) and
 ## Role mapping (CI_RoleCode → STAC provider role)
 
 The ISO `CI_RoleCode` codelist values map to STAC `providers[].roles[]`
-values as follows. The "role mapping" rows in the spreadsheet appear
-twice (once for metadata contact, once for resource point of contact);
-both use the same mapping.
+values as follows. The mapping is the same whether the role applies to
+the metadata contact or to the resource point of contact.
 
 | ISO `CI_RoleCode` | STAC `providers[].roles[]` |
 | --- | --- |

@@ -7,7 +7,16 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @un-fao
 
-This extension is three things at once:
+## Why this exists
+
+FAO maintains its dataset metadata in ISO 19115-1 form (served through
+`data.apps.fao.org/catalog`, CKAN-backed) and its geospatial content in
+STAC form (served through the FAO geospatial STAC catalog). A single
+dataset is described by both, with different vocabularies. This
+extension merges the two so a STAC client can read the full ISO 19115-1
+metadata of a FAO dataset without leaving STAC.
+
+It does this in three layers:
 
 1. **A mapping** — a normative table that maps every ISO 19115-1 field
    used by the FAO ISO profile to its STAC location, preferring an
@@ -20,12 +29,12 @@ This extension is three things at once:
    concepts that have no equivalent in any existing STAC extension.
 
 The two example documents in [`examples/`](examples/) demonstrate the
-profile end-to-end: each declares the full set of upstream extensions the
-FAO profile expects (`scientific`, `themes`, `language`, `processing`,
-`timestamps`, `datacube`, `raster`, `classification`, `render`,
-`alternate-assets`, plus the FAO `fao` extension and this `iso-to-stac`
-extension), so a reader can see exactly how an ISO 19115-1 record maps
-into a STAC Collection / Item under the FAO profile.
+profile end-to-end: each declares the full set of upstream extensions
+the FAO profile expects (`scientific`, `themes`, `language`,
+`processing`, `timestamps`, `datacube`, `raster`, `classification`,
+`render`, `alternate-assets`, plus the FAO `fao` extension and this
+`iso-to-stac` extension), so a reader can see exactly how an ISO
+19115-1 record maps into a STAC Collection / Item under the FAO profile.
 
 - Examples:
   - [Item example](examples/item.json): Profile in action on an Item
@@ -63,7 +72,7 @@ imposes the additional requirements below.
 
 ## Profile requirements (FAO ISO 19115-1)
 
-Three tiers, taken from the source spreadsheet:
+Three tiers:
 
 - **MANDATORY** — fields the FAO ISO profile marks in red. Producers
   MUST supply them; absence is a profile-conformance failure.

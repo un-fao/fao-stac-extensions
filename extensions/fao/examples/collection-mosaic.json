@@ -1,0 +1,91 @@
+{
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/fao/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/timestamps/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v2.3.0/schema.json",
+    "https://stac-extensions.github.io/raster/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/render/v2.0.0/schema.json"
+  ],
+  "id": "L3-QUAL-NDVI-LT.LCE",
+  "title": "Quality of NDVI — Long Term — Fezzan, Libya — 20m (WaPOR v3)",
+  "description": "The long-term quality layer indicating the average percentage of dekads with at least one valid NDVI observation over a five-year period (2018-2023). This per-tile Collection is the LCE-tile of the parent L3-QUAL-NDVI-LT mosaic. The example illustrates the FAO profile applied to a per-tile MOSAIC product: fao:product_type is `mosaic`, and proj:code on items carries the tile's native UTM zone (EPSG:32633) while cube:dimensions stays in WGS84.",
+  "license": "CC-BY-4.0",
+  "language": {"code": "en", "name": "English"},
+  "keywords": ["NDVI", "WAPOR-3", "Quality", "Long Term", "Fezzan", "Libya"],
+  "providers": [
+    {
+      "name": "FAO WaPOR",
+      "description": "Producer (wapor@example.org).",
+      "roles": ["producer", "host"]
+    }
+  ],
+  "extent": {
+    "spatial": {"bbox": [[14.202625493148755, 26.500141564430102, 14.545022743691012, 26.750841636561013]]},
+    "temporal": {"interval": [["1970-01-01T00:00:00Z", "2100-12-31T00:00:00Z"]]}
+  },
+  "themes": [
+    {
+      "scheme": "https://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopicCategoryCode",
+      "concepts": [{"id": "farming", "title": "Farming"}]
+    }
+  ],
+  "sci:citation": "FAO WaPOR v3, Quality of NDVI Long Term — Fezzan tile. https://example.org/cite/l3-qual-ndvi-lt-lce",
+  "fao:workspace": "WAPOR-3",
+  "fao:product_id": "L3-QUAL-NDVI-LT.LCE",
+  "fao:layer_id": "WAPOR-3.L3-QUAL-NDVI-LT",
+  "fao:product_type": "mosaic",
+  "iso:lineage_statement": "Per-pixel count of dekads with at least one valid NDVI observation, averaged over 2018-2023 from the WaPOR Sentinel-2-derived NDVI input series; expressed as percentage.",
+  "iso:maintenance_and_update_frequency": "notPlanned",
+  "iso:spatial_representation_type": "grid",
+  "iso:status": "completed",
+  "proj:epsg": 32633,
+  "cube:dimensions": {
+    "x": {"type": "spatial", "axis": "x", "extent": [14.202625493148755, 14.545022743691012], "reference_system": 4326, "description": "Longitude (WGS84)"},
+    "y": {"type": "spatial", "axis": "y", "extent": [26.500141564430102, 26.750841636561013], "reference_system": 4326, "description": "Latitude (WGS84)"},
+    "time": {"type": "temporal", "extent": ["1970-01-01T00:00:00Z", "2100-12-31T00:00:00Z"], "step": null, "description": "Static long-term layer (no temporal cadence)"}
+  },
+  "cube:variables": {
+    "l3-qual-ndvi-lt": {
+      "type": "data",
+      "dimensions": ["x", "y", "time"],
+      "description": "Quality of Normalized Difference Vegetation Index",
+      "unit": "% of dekads with at least one valid observation",
+      "nodata": 255,
+      "data_type": "uint8"
+    }
+  },
+  "renders": {
+    "data": {
+      "title": "Quality of NDVI",
+      "assets": ["data"],
+      "colormap_name": "QUAL-NDVI-LT",
+      "resampling": "average"
+    }
+  },
+  "summaries": {
+    "fao:workspace": ["WAPOR-3"],
+    "fao:product_id": ["L3-QUAL-NDVI-LT.LCE"],
+    "proj:epsg": [32633]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://example.org/assets/l3-qual-ndvi-lt-lce-thumbnail.png",
+      "type": "image/png",
+      "title": "Graphic overview",
+      "roles": ["thumbnail"]
+    }
+  },
+  "links": [
+    {"rel": "self", "type": "application/json", "href": "https://example.org/stac/collections/L3-QUAL-NDVI-LT.LCE"},
+    {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"},
+    {"rel": "items", "type": "application/geo+json", "href": "https://example.org/stac/collections/L3-QUAL-NDVI-LT.LCE/items"},
+    {"rel": "license", "type": "text/html", "title": "Creative Commons Attribution 4.0", "href": "https://creativecommons.org/licenses/by/4.0/"},
+    {"rel": "describedby", "type": "application/xml", "title": "Full metadata in ISO 19115 standard", "href": "https://example.org/iso/l3-qual-ndvi-lt-lce.xml"}
+  ]
+}

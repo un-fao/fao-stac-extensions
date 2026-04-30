@@ -1,0 +1,94 @@
+{
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/fao/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/timestamps/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v2.3.0/schema.json",
+    "https://stac-extensions.github.io/raster/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/render/v2.0.0/schema.json"
+  ],
+  "id": "L3-RSM-D.KOG",
+  "title": "Relative Root Zone Soil Moisture — Dekadal — Koga, Ethiopia — 20m (WaPOR v3)",
+  "description": "Relative root zone soil moisture (beta product) for the KOG tile of the L3-RSM-D mosaicset. Pixel values range 0..1 (wilting point .. field capacity). This per-tile Collection demonstrates the FAO profile applied to a MOSAICSET product: fao:product_type is `mosaicset`, items are dekadal slices, and per-item proj:code carries the tile's native UTM zone (EPSG:32637) while cube:dimensions stays in WGS84.",
+  "license": "CC-BY-SA-4.0",
+  "language": {"code": "en", "name": "English"},
+  "keywords": ["RSM", "WAPOR-3", "Soil Moisture", "Dekadal", "Koga", "Ethiopia"],
+  "providers": [
+    {
+      "name": "FAO WaPOR",
+      "description": "Producer (wapor@example.org).",
+      "roles": ["producer", "host"]
+    }
+  ],
+  "extent": {
+    "spatial": {"bbox": [[36.98262460576828, 11.302975968081904, 37.263384246053306, 11.551545049372422]]},
+    "temporal": {"interval": [["2018-01-01T00:00:00Z", "2025-12-31T00:00:00Z"]]}
+  },
+  "themes": [
+    {
+      "scheme": "https://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopicCategoryCode",
+      "concepts": [{"id": "farming", "title": "Farming"}, {"id": "inlandWaters", "title": "Inland Waters"}]
+    }
+  ],
+  "sci:citation": "FAO WaPOR v3, Relative Soil Moisture Dekadal — Koga tile. https://example.org/cite/l3-rsm-d-kog",
+  "fao:workspace": "WAPOR-3",
+  "fao:product_id": "L3-RSM-D.KOG",
+  "fao:layer_id": "WAPOR-3.L3-RSM-D",
+  "fao:product_type": "mosaicset",
+  "iso:lineage_statement": "Relative root-zone soil moisture estimated by the WaPOR ET-Look model from satellite-derived radiation, evapotranspiration and soil parameters; calibrated against ground observations where available.",
+  "iso:maintenance_and_update_frequency": "asNeeded",
+  "iso:spatial_representation_type": "grid",
+  "iso:status": "onGoing",
+  "iso:purpose": "Monitor root-zone soil moisture conditions to support agricultural drought assessment and irrigation planning.",
+  "iso:use_limitation": "Beta product. Validate locally before operational use.",
+  "proj:epsg": 32637,
+  "cube:dimensions": {
+    "x": {"type": "spatial", "axis": "x", "extent": [36.98262460576828, 37.263384246053306], "reference_system": 4326, "description": "Longitude (WGS84)"},
+    "y": {"type": "spatial", "axis": "y", "extent": [11.302975968081904, 11.551545049372422], "reference_system": 4326, "description": "Latitude (WGS84)"},
+    "time": {"type": "temporal", "extent": ["2018-01-01T00:00:00Z", "2025-12-31T00:00:00Z"], "step": "P10D", "description": "Dekad"}
+  },
+  "cube:variables": {
+    "l3-rsm-d": {
+      "type": "data",
+      "dimensions": ["x", "y", "time"],
+      "description": "Relative Soil Moisture",
+      "unit": "%",
+      "nodata": -9999,
+      "data_type": "int16"
+    }
+  },
+  "renders": {
+    "data": {
+      "title": "Relative Soil Moisture",
+      "assets": ["data"],
+      "colormap_name": "RSM-D",
+      "resampling": "average"
+    }
+  },
+  "summaries": {
+    "fao:workspace": ["WAPOR-3"],
+    "fao:product_id": ["L3-RSM-D.KOG"],
+    "proj:epsg": [32637]
+  },
+  "assets": {
+    "thumbnail": {
+      "href": "https://example.org/assets/l3-rsm-d-kog-thumbnail.png",
+      "type": "image/png",
+      "title": "Graphic overview",
+      "roles": ["thumbnail"]
+    }
+  },
+  "links": [
+    {"rel": "self", "type": "application/json", "href": "https://example.org/stac/collections/L3-RSM-D.KOG"},
+    {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"},
+    {"rel": "items", "type": "application/geo+json", "href": "https://example.org/stac/collections/L3-RSM-D.KOG/items"},
+    {"rel": "license", "type": "text/html", "title": "Creative Commons Attribution Share-Alike 4.0", "href": "https://creativecommons.org/licenses/by-sa/4.0/"},
+    {"rel": "describedby", "type": "application/xml", "title": "Full metadata in ISO 19115 standard", "href": "https://example.org/iso/l3-rsm-d-kog.xml"}
+  ]
+}

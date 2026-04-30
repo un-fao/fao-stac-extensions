@@ -11,9 +11,11 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Changed
 
-- Mapping spec at `mapping/iso19115-2-to-stac.md` regenerated from
-  source spreadsheet `_v2` (was `_v1`). Documentation-only change; no
-  schema, field, or example impact.
+- Mapping spec at `mapping/iso19115-2-to-stac.md`: header rewritten to
+  describe its purpose as a per-field ISO ↔ STAC crosswalk, no longer
+  references the (uncommitted) source working document by filename.
+- README rewritten to lead with the motivation (merging the FAO ISO
+  metadata catalog with the FAO STAC catalog).
 
 ### Deprecated
 
@@ -21,9 +23,9 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Fixed
 
-- LINKS to RESOURCES section: the `created` / `published` / `updated`
-  rows are now correctly attributed to the **Timestamps** extension
-  (not Alternate Assets, which was a v1 spreadsheet typo).
+- LINKS to RESOURCES section: the asset `created` / `published` /
+  `updated` rows are now correctly attributed to the **Timestamps**
+  extension (was previously misattributed to Alternate Assets).
 
 ## [v0.2.0] — Initial field set + mapping spec
 

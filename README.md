@@ -3,6 +3,28 @@
 Umbrella repository for STAC extensions authored and maintained by the
 Food and Agriculture Organization of the United Nations (FAO).
 
+## Why this exists
+
+FAO publishes geospatial data through two parallel catalogs:
+
+- **`data.apps.fao.org/catalog`** — a CKAN-backed catalog that exposes
+  rich ISO 19115-1 metadata for every dataset (lineage, constraints,
+  maintenance frequency, contacts, citation, ISO topic categories…).
+- **the FAO geospatial STAC catalog** (in review at
+  `data.review.fao.org/geospatial/search/stac/`, prod at
+  `data.apps.fao.org/geospatial/search/stac/`) — an OGC API / STAC
+  catalog that exposes the same datasets as Collections and Items
+  with raster / vector / datacube content.
+
+The two catalogs describe the same datasets but use different metadata
+shapes, and historically users had to consult both. The work in this
+repository merges the ISO catalog content into the STAC catalog
+without information loss, so a single STAC API call returns the full
+ISO 19115-1 metadata alongside the geospatial content. Doing the merge
+via two community-shareable STAC extensions (rather than ad-hoc
+private fields) means other catalogs facing the same merge problem can
+adopt the same vocabulary.
+
 Each extension lives under [`extensions/`](extensions/) and follows the
 official [STAC extension template](https://github.com/stac-extensions/template)
 (README, JSON Schema, examples, CHANGELOG). The umbrella repo also hosts

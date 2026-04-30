@@ -7,20 +7,32 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @un-fao
 
-This extension carries FAO platform-specific fields applicable to both
-raster and vector products published by the FAO Agro-Informatics
-Platform.
+## Why this exists
 
-The field set is intentionally **service-agnostic**: it does not expose
-internal service identifiers (e.g. the name of the raster-serving
-backend), storage-bucket paths, or other implementation details. The
-opaque platform identifier that earlier wire formats carried as a single
+The FAO geospatial STAC catalog (data.review.fao.org / data.apps.fao.org)
+needs a small set of platform-specific fields to preserve the
+identifiers and product-shape information that downstream FAO tooling
+depends on — without leaking internal service names, storage-bucket
+paths, or other implementation details into the public wire format.
+This extension carries those fields, applicable to both raster and
+vector products. The companion [`iso-to-stac`](../iso-to-stac/)
+extension covers the orthogonal merge of ISO 19115-1 catalog metadata
+into the same STAC documents.
+
+The field set is intentionally **service-agnostic**: the opaque
+platform identifier that earlier wire formats carried as a single
 string is fragmented here into typed fields (`fao:workspace`,
-`fao:product_id`, `fao:item_code`).
+`fao:product_id`, `fao:item_code`); the publishable product-type
+classifier ships as a clean enum (`fao:product_type`); raster vs
+vector co-exist under the one flat `fao:` namespace, with field
+applicability documented per row.
 
 - Examples:
-  - [Item example](examples/item.json): Raster Item drawn from an `ASI-D`-style payload, declaring `fao:*` alongside the standard extensions used by the FAO profile.
-  - [Collection example](examples/collection.json): Companion Collection.
+  - [Examples index](examples/README.md) — overview of every worked example.
+  - [`item.json`](examples/item.json) + [`collection.json`](examples/collection.json) — raster MAPSET drawn from `ASI-D`.
+  - [`collection-mosaic.json`](examples/collection-mosaic.json) — per-tile MOSAIC drawn from `L3-QUAL-NDVI-LT.LCE`.
+  - [`collection-mosaicset.json`](examples/collection-mosaicset.json) — per-tile MOSAICSET drawn from `L3-RSM-D.KOG`.
+  - [`item-mosaicset.json`](examples/item-mosaicset.json) — dekadal Item from the same MOSAICSET.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 

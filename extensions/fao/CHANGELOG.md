@@ -9,6 +9,15 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Added
 
+- Three additional worked examples covering the rest of the
+  `fao:product_type` enum: `examples/collection-mosaic.json`
+  (`L3-QUAL-NDVI-LT.LCE`), `examples/collection-mosaicset.json`
+  (`L3-RSM-D.KOG`), and `examples/item-mosaicset.json` (a dekadal Item
+  from the same MOSAICSET). The MOSAIC and MOSAICSET examples include
+  top-level `proj:epsg` carrying the tile's native UTM zone, per the
+  FAO STAC change report.
+- `examples/README.md` indexing every worked example.
+
 ### Changed
 
 ### Deprecated

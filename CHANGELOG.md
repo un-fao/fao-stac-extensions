@@ -11,12 +11,28 @@ versioned CHANGELOG.
 
 ### Added
 
+- Three new worked examples under `extensions/fao/examples/`:
+  `collection-mosaic.json` (`L3-QUAL-NDVI-LT.LCE` MOSAIC tile),
+  `collection-mosaicset.json` (`L3-RSM-D.KOG` MOSAICSET tile), and
+  `item-mosaicset.json` (a dekadal Item from the same MOSAICSET).
+  Together with the existing `ASI-D` MAPSET pair, the examples now
+  cover all three values of the `fao:product_type` enum and exercise
+  the per-tile `proj:epsg` pattern documented in the FAO STAC change
+  report.
+- `extensions/fao/examples/README.md` indexing the worked examples
+  and explaining what each one demonstrates.
+
 ### Changed
 
-- `extensions/iso-to-stac/mapping/iso19115-2-to-stac.md` regenerated
-  from source spreadsheet `_v2` — see the per-extension
-  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md). Documentation-only
-  change; no schema, field, or example impact.
+- Top-level README rewritten to lead with the motivation (FAO needs to
+  merge its `data.apps.fao.org/catalog` ISO 19115 metadata into the
+  geospatial STAC catalog without losing information).
+- `extensions/iso-to-stac/README.md` rewritten with the same motivation
+  framing.
+- `extensions/iso-to-stac/mapping/iso19115-2-to-stac.md`: header text
+  rewritten; no longer references the (uncommitted) source working
+  document by filename — see the per-extension
+  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md).
 
 ### Deprecated
 
