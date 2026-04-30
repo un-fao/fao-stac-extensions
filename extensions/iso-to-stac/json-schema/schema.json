@@ -1,141 +1,64 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/iso-to-stac/v1.0.0/schema.json#",
+  "$id": "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json#",
   "title": "ISO 19115-2 to STAC Mapping Extension",
-  "description": "STAC ISO 19115-2 Mapping Extension for STAC Items and STAC Collections.",
+  "description": "Defines the mapping from ISO 19115-2 metadata to STAC and adds iso:* fields for ISO concepts that have no equivalent in any existing STAC extension.",
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC Items.",
+      "$comment": "Schema for STAC Items.",
       "allOf": [
-        {
-          "$ref": "#/definitions/stac_extensions"
-        },
+        {"$ref": "#/definitions/stac_extensions"},
         {
           "type": "object",
-          "required": [
-            "type",
-            "properties",
-            "assets"
-          ],
+          "required": ["type", "properties", "assets"],
           "properties": {
-            "type": {
-              "const": "Feature"
-            },
-            "properties": {
-              "allOf": [
-                {
-                  "$comment": "Require fields here for Item Properties.",
-                  "required": [
-                    "iso:placeholder"
-                  ]
-                },
-                {
-                  "$ref": "#/definitions/fields"
-                }
-              ]
-            },
+            "type": {"const": "Feature"},
+            "properties": {"$ref": "#/definitions/fields"},
             "assets": {
-              "$comment": "This validates the fields in Item Assets, but does not require them.",
               "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
+              "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
         }
       ]
     },
     {
-      "$comment": "This is the schema for STAC Collections.",
+      "$comment": "Schema for STAC Collections.",
       "type": "object",
       "allOf": [
         {
-          "required": [
-            "type"
-          ],
-          "properties": {
-            "type": {
-              "const": "Collection"
-            }
-          }
+          "required": ["type"],
+          "properties": {"type": {"const": "Collection"}}
         },
-        {
-          "$ref": "#/definitions/stac_extensions"
-        }
+        {"$ref": "#/definitions/stac_extensions"}
       ],
       "anyOf": [
         {
           "$comment": "Top-level Collection fields.",
-          "allOf": [
-            {
-              "required": [
-                "iso:placeholder"
-              ]
-            },
-            {
-              "$ref": "#/definitions/fields"
-            }
-          ]
+          "$ref": "#/definitions/fields"
         },
         {
-          "$comment": "Validates fields in Collection Assets, but does not require them.",
-          "required": [
-            "assets"
-          ],
+          "required": ["assets"],
           "properties": {
             "assets": {
               "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
+              "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
         },
         {
-          "$comment": "Validates fields in Item Asset Definitions.",
-          "required": [
-            "item_assets"
-          ],
+          "required": ["item_assets"],
           "properties": {
             "item_assets": {
               "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
+              "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
         },
         {
-          "$comment": "Schema for fields in Summaries.",
-          "required": [
-            "summaries"
-          ],
+          "required": ["summaries"],
           "properties": {
-            "summaries": {
-              "$ref": "#/definitions/require_any_field"
-            }
+            "summaries": {"type": "object"}
           }
         }
       ]
@@ -144,38 +67,68 @@
   "definitions": {
     "stac_extensions": {
       "type": "object",
-      "required": [
-        "stac_extensions"
-      ],
+      "required": ["stac_extensions"],
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {
-            "const": "https://stac-extensions.github.io/iso-to-stac/v1.0.0/schema.json"
-          }
+          "contains": {"const": "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json"}
         }
       }
     },
-    "require_any_field": {
-      "$comment": "List every field here so the existence of one of them can be enforced elsewhere.",
-      "anyOf": [
-        {"required": ["iso:placeholder"]}
-      ]
-    },
     "fields": {
-      "$comment": "Add new fields here. Don't require them here, do that above in the corresponding schema.",
+      "$comment": "All iso:* fields are optional at the schema level. Required-ness is set by the profile (see README), not by the schema.",
       "type": "object",
       "properties": {
-        "iso:placeholder": {
-          "type": "string"
+        "iso:lineage_statement": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_DataIdentification.resourceLineage.LI_Lineage.statement. A human-readable statement describing the data's lineage."
+        },
+        "iso:maintenance_and_update_frequency": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_MaintenanceInformation.maintenanceAndUpdateFrequency. MD_MaintenanceFrequencyCode codelist value (e.g. continual, daily, weekly, fortnightly, monthly, quarterly, biannually, annually, asNeeded, irregular, notPlanned, unknown, periodic, semimonthly, biennially)."
+        },
+        "iso:presentation_form": {
+          "type": "string",
+          "description": "ISO 19115-1 CI_Citation.presentationForm. CI_PresentationFormCode codelist value (e.g. mapDigital, documentDigital, imageDigital, profileDigital, modelDigital, tableDigital, videoDigital)."
+        },
+        "iso:character_set_code": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_DataIdentification.characterSet. MD_CharacterSetCode codelist value (e.g. utf8, ucs2, ucs4, 8859part1, ebcdic, ascii)."
+        },
+        "iso:spatial_representation_type": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_DataIdentification.spatialRepresentationType. MD_SpatialRepresentationTypeCode codelist value: vector, grid, textTable, tin, stereoModel, video."
+        },
+        "iso:purpose": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_DataIdentification.purpose. Free-text summary of the intended purpose of the resource."
+        },
+        "iso:status": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_DataIdentification.status. MD_ProgressCode codelist value (e.g. completed, historicalArchive, obsolete, onGoing, planned, required, underDevelopment, final, pending, retired, superseded, tentative, valid, accepted, notAccepted, withdrawn, proposed, deprecated)."
+        },
+        "iso:access_constraints": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_LegalConstraints.accessConstraints. MD_RestrictionCode codelist value (e.g. copyright, patent, patentPending, trademark, license, intellectualPropertyRights, restricted, otherRestrictions, unrestricted, licenseUnrestricted, licenseEndUser, licenseDistributor, private, statutory, confidential, sensitiveButUnclassified, in-confidence)."
+        },
+        "iso:use_constraints": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_LegalConstraints.useConstraints. MD_RestrictionCode codelist value, same enumeration as iso:access_constraints."
+        },
+        "iso:use_limitation": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_LegalConstraints.useLimitation. Free-text limitation on use applying to the resource."
+        },
+        "iso:other_constraints": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_LegalConstraints.otherConstraints. Free-text other constraints applying to the resource."
         }
       },
       "patternProperties": {
         "^(?!iso:)": {
-          "$comment": "Reject any non-`iso:`-prefixed key from this fields block."
+          "$comment": "Allow any non-iso:-prefixed key to pass through (this extension co-exists with others)."
         }
-      },
-      "additionalProperties": false
+      }
     }
   }
 }

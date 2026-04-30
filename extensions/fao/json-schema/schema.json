@@ -1,142 +1,63 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/fao/v1.0.0/schema.json#",
+  "$id": "https://stac-extensions.github.io/fao/v0.2.0/schema.json#",
   "title": "FAO Extension",
-  "description": "STAC FAO Extension for STAC Items and STAC Collections.",
+  "description": "FAO platform-specific fields for STAC Items and Collections published by the FAO Agro-Informatics Platform. Covers raster and vector products under one namespace.",
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC Items.",
+      "$comment": "Schema for STAC Items.",
       "allOf": [
-        {
-          "$ref": "#/definitions/stac_extensions"
-        },
+        {"$ref": "#/definitions/stac_extensions"},
         {
           "type": "object",
-          "required": [
-            "type",
-            "properties",
-            "assets"
-          ],
+          "required": ["type", "properties", "assets"],
           "properties": {
-            "type": {
-              "const": "Feature"
-            },
-            "properties": {
-              "allOf": [
-                {
-                  "$comment": "Require fields here for Item Properties.",
-                  "required": [
-                    "fao:placeholder"
-                  ]
-                },
-                {
-                  "$ref": "#/definitions/fields"
-                }
-              ]
-            },
+            "type": {"const": "Feature"},
+            "properties": {"$ref": "#/definitions/fields"},
             "assets": {
-              "$comment": "This validates the fields in Item Assets, but does not require them.",
               "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
+              "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
         }
       ]
     },
     {
-      "$comment": "This is the schema for STAC Collections.",
+      "$comment": "Schema for STAC Collections.",
       "type": "object",
       "allOf": [
         {
-          "required": [
-            "type"
-          ],
-          "properties": {
-            "type": {
-              "const": "Collection"
-            }
-          }
+          "required": ["type"],
+          "properties": {"type": {"const": "Collection"}}
         },
-        {
-          "$ref": "#/definitions/stac_extensions"
-        }
+        {"$ref": "#/definitions/stac_extensions"}
       ],
       "anyOf": [
         {
           "$comment": "Top-level Collection fields.",
-          "allOf": [
-            {
-              "required": [
-                "fao:placeholder"
-              ]
-            },
-            {
-              "$ref": "#/definitions/fields"
-            }
-          ]
+          "$ref": "#/definitions/fields"
         },
         {
-          "$comment": "Validates fields in Collection Assets, but does not require them.",
-          "required": [
-            "assets"
-          ],
+          "required": ["assets"],
           "properties": {
             "assets": {
               "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
+              "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
         },
         {
-          "$comment": "Validates fields in Item Asset Definitions.",
-          "required": [
-            "item_assets"
-          ],
+          "required": ["item_assets"],
           "properties": {
             "item_assets": {
               "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
+              "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
         },
         {
-          "$comment": "Schema for fields in Summaries.",
-          "required": [
-            "summaries"
-          ],
-          "properties": {
-            "summaries": {
-              "$ref": "#/definitions/require_any_field"
-            }
-          }
+          "required": ["summaries"],
+          "properties": {"summaries": {"type": "object"}}
         }
       ]
     }
@@ -144,38 +65,54 @@
   "definitions": {
     "stac_extensions": {
       "type": "object",
-      "required": [
-        "stac_extensions"
-      ],
+      "required": ["stac_extensions"],
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {
-            "const": "https://stac-extensions.github.io/fao/v1.0.0/schema.json"
-          }
+          "contains": {"const": "https://stac-extensions.github.io/fao/v0.2.0/schema.json"}
         }
       }
     },
-    "require_any_field": {
-      "$comment": "List every field here so the existence of one of them can be enforced elsewhere.",
-      "anyOf": [
-        {"required": ["fao:placeholder"]}
-      ]
-    },
     "fields": {
-      "$comment": "Add new fields here. Don't require them here, do that above in the corresponding schema.",
+      "$comment": "All fao:* fields are optional at the schema level.",
       "type": "object",
       "properties": {
-        "fao:placeholder": {
-          "type": "string"
+        "fao:workspace": {
+          "type": "string",
+          "description": "FAO workspace identifier (e.g. \"ASIS\", \"WAPOR-3\"). Service-agnostic; never embeds an internal-service term or storage-bucket path."
+        },
+        "fao:product_id": {
+          "type": "string",
+          "description": "FAO product identifier within the workspace. Typically equal to the STAC Collection id. Carried explicitly so consumers don't have to assume the equality."
+        },
+        "fao:item_code": {
+          "type": "string",
+          "description": "Per-item leaf code. Typically equal to the STAC Item id. Carried explicitly for the same reason as fao:product_id."
+        },
+        "fao:layer_id": {
+          "type": "string",
+          "description": "Stable, service-agnostic FAO layer reference for the Collection. Used to track provenance back to the FAO platform's internal layer registry without exposing the registry's URL or service identity."
+        },
+        "fao:product_type": {
+          "type": "string",
+          "enum": ["mapset", "mosaic", "mosaicset", "dataset"],
+          "description": "RASTER ONLY. FAO product-type classifier. mapset = single-tile collection of related rasters; mosaic = multi-tile composite; mosaicset = multi-tile composite organised by tile; dataset = miscellaneous. Vector collections MUST NOT set this field."
+        },
+        "fao:geometry_type": {
+          "type": "string",
+          "description": "VECTOR ONLY. OGR/GeoJSON geometry type (e.g. \"Point\", \"LineString\", \"Polygon\", \"MultiPolygon\"). Raster collections MUST NOT set this field."
+        },
+        "fao:feature_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "VECTOR ONLY. Number of features in the layer (Collection level) or in the item (Item level). Raster collections MUST NOT set this field."
         }
       },
       "patternProperties": {
         "^(?!fao:)": {
-          "$comment": "Reject any non-`fao:`-prefixed key from this fields block."
+          "$comment": "Allow any non-fao:-prefixed key to pass through (this extension co-exists with others)."
         }
-      },
-      "additionalProperties": false
+      }
     }
   }
 }

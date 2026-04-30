@@ -1,41 +1,116 @@
 {
+  "type": "Feature",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://stac-extensions.github.io/iso-to-stac/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/fao/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/timestamps/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v2.3.0/schema.json",
+    "https://stac-extensions.github.io/raster/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/render/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json"
   ],
-  "type": "Feature",
-  "id": "item",
-  "bbox": [
-    172.9,
-    1.3,
-    173,
-    1.4
-  ],
+  "id": "ASIS.ASI-D.2026-04-D2.GS2.LC-G",
+  "collection": "ASI-D",
+  "bbox": [-180.0, -56.004464292390026, 179.9955360576, 75.0044643],
   "geometry": {
     "type": "Polygon",
-    "coordinates": [
-      [
-        [172.9, 1.3],
-        [173, 1.3],
-        [173, 1.4],
-        [172.9, 1.4],
-        [172.9, 1.3]
-      ]
-    ]
+    "coordinates": [[
+      [179.9955360576, -56.004464292390026],
+      [179.9955360576, 75.0044643],
+      [-180.0, 75.0044643],
+      [-180.0, -56.004464292390026],
+      [179.9955360576, -56.004464292390026]
+    ]]
   },
   "properties": {
-    "datetime": "2020-12-11T22:38:32Z",
-    "iso:placeholder": "skeleton"
-  },
-  "links": [
-    {
-      "href": "https://example.com/examples/item.json",
-      "rel": "self"
+    "datetime": null,
+    "start_datetime": "2026-04-11T00:00:00Z",
+    "end_datetime": "2026-04-20T00:00:00Z",
+    "created": "2026-04-22T16:29:44.818622Z",
+    "updated": "2026-04-24T14:33:17.461586Z",
+    "fao:workspace": "ASIS",
+    "fao:product_id": "ASI-D",
+    "fao:item_code": "ASIS.ASI-D.2026-04-D2.GS2.LC-G",
+    "iso:spatial_representation_type": "grid",
+    "iso:status": "onGoing",
+    "proj:code": "EPSG:4326",
+    "proj:bbox": [-180.004464, -56.004464292390026, 179.9955360576, 75.0044643],
+    "proj:transform": [-180.004464, 0.00892857143, 0.0, 75.0044643, 0.0, -0.00892857143],
+    "proj:shape": [14673, 40320],
+    "cube:dimensions": {
+      "x": {"type": "spatial", "axis": "x", "extent": [-180.0, 179.9955360576]},
+      "y": {"type": "spatial", "axis": "y", "extent": [-56.004464292390026, 75.0044643]},
+      "time": {"type": "temporal", "extent": ["2026-04-11T00:00:00Z", "2026-04-20T00:00:00Z"], "step": "P10D"},
+      "SEASON": {"type": "categorical", "values": ["GS2"]},
+      "LCT": {"type": "categorical", "values": ["LC-G"]}
+    },
+    "cube:variables": {
+      "asi-d": {
+        "type": "data",
+        "dimensions": ["x", "y", "time", "SEASON", "LCT"],
+        "description": "Agricultural Stress Index",
+        "unit": "%",
+        "nodata": 255,
+        "data_type": "float32"
+      }
+    },
+    "renders": {
+      "data": {
+        "title": "Agricultural Stress Index",
+        "assets": ["data"],
+        "colormap_name": "ASI-D-G",
+        "resampling": "nearest"
+      }
     }
-  ],
+  },
   "assets": {
     "data": {
-      "href": "https://example.com/examples/file.tif"
+      "href": "https://example.org/data/ASIS.ASI-D.2026-04-D2.GS2.LC-G.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Cloud Optimized GeoTIFF",
+      "description": "Agricultural Stress Index",
+      "roles": ["data"],
+      "file:size": 43275165,
+      "alternate": {
+        "https": {
+          "href": "https://example.org/mirror/data/ASIS.ASI-D.2026-04-D2.GS2.LC-G.tif",
+          "title": "HTTPS mirror"
+        }
+      },
+      "bands": [
+        {
+          "name": "B1",
+          "description": "Agricultural Stress Index",
+          "data_type": "float32",
+          "nodata": 255,
+          "unit": "%",
+          "raster:scale": 1.0,
+          "raster:offset": 0.0,
+          "raster:spatial_resolution": 993.92,
+          "classification:classes": [
+            {"value": 251, "name": "off_season", "title": "Off season", "nodata": false},
+            {"value": 252, "name": "no_data", "title": "No data", "nodata": false},
+            {"value": 253, "name": "no_seasonality", "title": "No seasonality", "nodata": false},
+            {"value": 254, "name": "no_cropland_or_no_grassland", "title": "No cropland / no grassland", "nodata": false}
+          ]
+        }
+      ]
+    },
+    "thumbnail": {
+      "href": "https://example.org/assets/ASIS.ASI-D.2026-04-D2.GS2.LC-G.png",
+      "type": "image/png",
+      "title": "Thumbnail",
+      "roles": ["thumbnail"]
     }
-  }
+  },
+  "links": [
+    {"rel": "self", "type": "application/geo+json", "href": "https://example.org/stac/collections/ASI-D/items/ASIS.ASI-D.2026-04-D2.GS2.LC-G"},
+    {"rel": "parent", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D"},
+    {"rel": "collection", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D"},
+    {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"}
+  ]
 }

@@ -22,5 +22,5 @@ Field models, the ISO 19115-2 XML mapper, and the mapping table land in
 v0.2.0.
 """
 
-SCHEMA_URI = "https://stac-extensions.github.io/iso-to-stac/v1.0.0/schema.json"
+SCHEMA_URI = "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json"
 PREFIX = "iso"

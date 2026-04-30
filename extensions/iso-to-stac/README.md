@@ -1,57 +1,105 @@
 # ISO 19115-2 ↔ STAC Mapping Extension Specification
 
 - **Title:** ISO 19115-2 to STAC Mapping
-- **Identifier:** <https://stac-extensions.github.io/iso-to-stac/v1.0.0/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json>
 - **Field Name Prefix:** iso
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @un-fao
 
-This document describes the ISO 19115-2 ↔ STAC Mapping Extension to the
-[SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec)
-(STAC) specification.
+This extension is three things at once:
 
-The extension has two purposes:
+1. **A mapping** — a normative table that maps every ISO 19115-1 field
+   used by the FAO ISO profile to its STAC location, preferring an
+   existing community extension wherever possible. The full table lives
+   at [`mapping/iso19115-2-to-stac.md`](mapping/iso19115-2-to-stac.md).
+2. **A profile** — a statement of which mapped fields are mandatory,
+   needed, or optional in the FAO ISO 19115-1 profile (see "Profile
+   requirements" below).
+3. **A STAC extension** — a small set of `iso:*` fields covering the ISO
+   concepts that have no equivalent in any existing STAC extension.
 
-1. Define the canonical mapping between [ISO 19115-2](https://www.iso.org/standard/67039.html)
-   metadata elements and STAC fields, preferring existing community
-   extensions wherever a one-to-one (or one-to-many) mapping exists.
-2. Add a small set of `iso:*` fields ONLY where an ISO 19115-2 element
-   has no acceptable home in STAC core or in an existing extension.
-
-A reference Python implementation that consumes ISO 19115-2 XML and
-emits a STAC-shaped dictionary ships alongside the spec under
-[`reference-implementation/`](../../reference-implementation/) at the
-umbrella-repo root.
+The two example documents in [`examples/`](examples/) demonstrate the
+profile end-to-end: each declares the full set of upstream extensions the
+FAO profile expects (`scientific`, `themes`, `language`, `processing`,
+`timestamps`, `datacube`, `raster`, `classification`, `render`,
+`alternate-assets`, plus the FAO `fao` extension and this `iso-to-stac`
+extension), so a reader can see exactly how an ISO 19115-1 record maps
+into a STAC Collection / Item under the FAO profile.
 
 - Examples:
-  - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
-  - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection
+  - [Item example](examples/item.json): Profile in action on an Item
+  - [Collection example](examples/collection.json): Profile in action on a Collection
 - [JSON Schema](json-schema/schema.json)
+- [Mapping](mapping/iso19115-2-to-stac.md)
 - [Changelog](./CHANGELOG.md)
 
 ## Fields
 
-The fields in the table below can be used in these parts of STAC documents:
+The `iso:*` fields defined by this extension. They can be used in:
 
 - [ ] Catalogs
 - [x] Collections
-- [x] Item Properties (incl. Summaries in Collections)
+- [x] Item Properties
 - [ ] Assets
 - [ ] Links
 
-| Field Name      | Type   | Description                                            |
-| --------------- | ------ | ------------------------------------------------------ |
-| iso:placeholder | string | Placeholder field. The real field set lands in v0.2.0. |
+| Field Name | Type | Description |
+| --- | --- | --- |
+| iso:lineage_statement | string | `MD_DataIdentification.resourceLineage.LI_Lineage.statement` — human-readable lineage statement. |
+| iso:maintenance_and_update_frequency | string | `MD_MaintenanceInformation.maintenanceAndUpdateFrequency` — `MD_MaintenanceFrequencyCode` value. |
+| iso:presentation_form | string | `CI_Citation.presentationForm` — `CI_PresentationFormCode` value. |
+| iso:character_set_code | string | `MD_DataIdentification.characterSet` — `MD_CharacterSetCode` value. |
+| iso:spatial_representation_type | string | `MD_DataIdentification.spatialRepresentationType` — `MD_SpatialRepresentationTypeCode` value. |
+| iso:purpose | string | `MD_DataIdentification.purpose` — free text. |
+| iso:status | string | `MD_DataIdentification.status` — `MD_ProgressCode` value. |
+| iso:access_constraints | string | `MD_LegalConstraints.accessConstraints` — `MD_RestrictionCode` value. |
+| iso:use_constraints | string | `MD_LegalConstraints.useConstraints` — `MD_RestrictionCode` value. |
+| iso:use_limitation | string | `MD_LegalConstraints.useLimitation` — free text. |
+| iso:other_constraints | string | `MD_LegalConstraints.otherConstraints` — free text. |
 
-The field table is a placeholder for the v0.1.0 skeleton. The full
-mapping table and the `iso:*` field set will be added in v0.2.0.
+All fields are optional at the schema level. The FAO ISO 19115-1 profile
+imposes the additional requirements below.
 
-## Mapping Spec
+## Profile requirements (FAO ISO 19115-1)
 
-The normative ISO 19115-2 ↔ STAC mapping table will live at
-[`mapping/iso19115-2-to-stac.md`](mapping/iso19115-2-to-stac.md) in
-v0.2.0. Until then, the directory is a placeholder.
+Three tiers, taken from the source spreadsheet:
+
+- **MANDATORY** — fields the FAO ISO profile marks in red. Producers
+  MUST supply them; absence is a profile-conformance failure.
+- **Needed** — fields the profile requires in practice but ISO does not
+  mark mandatory. Producers SHOULD supply them.
+- **Optional** — neither ISO nor the profile requires them; producers
+  MAY supply them.
+
+The mapping document at [`mapping/iso19115-2-to-stac.md`](mapping/iso19115-2-to-stac.md)
+carries the full profile column for every row. The summary for `iso:*`
+fields specifically:
+
+| Field | Profile tier |
+| --- | --- |
+| `iso:lineage_statement` | **MANDATORY** |
+| `iso:maintenance_and_update_frequency` | **Needed** |
+| `iso:presentation_form` | Optional |
+| `iso:character_set_code` | Optional |
+| `iso:spatial_representation_type` | Optional |
+| `iso:purpose` | Optional |
+| `iso:status` | Optional |
+| `iso:access_constraints` | Optional |
+| `iso:use_constraints` | Optional |
+| `iso:use_limitation` | Optional |
+| `iso:other_constraints` | Optional |
+
+The schema does NOT enforce these requirements: profile checking is the
+responsibility of the validator, not the extension. Schema-level
+`required: []` would prevent producers who comply with ISO but not the
+FAO profile from using the extension.
+
+## Relation types
+
+This extension defines no new `rel` types. The link relations used by
+the FAO profile are STAC core (`describedby`, `license`, `via`, `style`,
+`legend`, `sld`, `self`, `parent`, `root`, `items`, `item`).
 
 ## Contributing
 

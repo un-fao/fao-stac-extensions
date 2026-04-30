@@ -14,8 +14,8 @@ extensions.
 
 | Extension | Field prefix | Status | Description |
 | --- | --- | --- | --- |
-| [`fao`](extensions/fao/) | `fao` | Proposal (skeleton) | FAO platform-specific fields applicable to both raster and vector products published by the FAO Agro-Informatics Platform. |
-| [`iso-to-stac`](extensions/iso-to-stac/) | `iso` | Proposal (skeleton) | Canonical mapping between ISO 19115-2 and STAC. Adds `iso:*` fields only where no existing extension covers the ISO concept; ships with a reference Python XML→STAC mapper. |
+| [`fao`](extensions/fao/) | `fao` | Proposal — initial field set (v0.2.0) | FAO platform-specific fields applicable to both raster and vector products published by the FAO Agro-Informatics Platform. |
+| [`iso-to-stac`](extensions/iso-to-stac/) | `iso` | Proposal — initial field set (v0.2.0) | Canonical mapping between ISO 19115-2 and STAC, plus the FAO ISO 19115-1 profile. Adds `iso:*` fields only where no existing extension covers the ISO concept. |
 
 ## Repository Layout
 

@@ -19,6 +19,32 @@ versioned CHANGELOG.
 
 ### Fixed
 
+## [v0.2.0] — Initial field sets for both extensions
+
+### Added
+
+- `extensions/fao/` — initial field set (`fao:workspace`,
+  `fao:product_id`, `fao:item_code`, `fao:layer_id`,
+  `fao:product_type`, `fao:geometry_type`, `fao:feature_count`),
+  raster + vector worked examples, README field table. See the
+  per-extension [CHANGELOG](extensions/fao/CHANGELOG.md).
+- `extensions/iso-to-stac/` — 11 new `iso:*` fields, normative
+  mapping table at
+  [`mapping/iso19115-2-to-stac.md`](extensions/iso-to-stac/mapping/iso19115-2-to-stac.md),
+  worked examples demonstrating the full FAO profile (12+ extensions
+  declared on the same Collection / Item). See the per-extension
+  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md).
+- Reference-implementation package version bumped to `0.2.0`. Models
+  and the ISO XML mapper still land in a later release.
+
+### Changed
+
+- Schema URLs bumped from `v1.0.0` (skeleton placeholder) to `v0.2.0`
+  across both extensions and all references (examples, package.json,
+  reference-implementation, tests).
+- Top-level README extension table updated to remove the "skeleton"
+  status; both extensions are now at "Proposal — initial field set".
+
 ## [v0.1.0] — Skeleton
 
 ### Added
@@ -39,11 +65,12 @@ versioned CHANGELOG.
 
 | Phase | Target |
 | --- | --- |
-| Proposal (skeleton) | now |
-| Authoring (fields + examples) | next iteration, after the field allocation tables are agreed |
-| Pilot | TBD — after the FAO Agro-Informatics Platform emits the extension URLs |
+| Proposal (skeleton) | v0.1.0 (DONE) |
+| Authoring (fields + examples + mapping) | v0.2.0 (DONE) |
+| Pilot | TBD — after the FAO Agro-Informatics Platform emits the v0.2.0 URLs |
 | Candidate | After PR to the `stac-extensions/` org index |
 | Stable | After at least one external implementer adopts |
 
-[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.1.0...HEAD>
+[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...HEAD>
+[v0.2.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.2.0>
 [v0.1.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.1.0>
