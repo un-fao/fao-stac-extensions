@@ -51,7 +51,7 @@ community extension, or to an `iso:*` field defined by this extension
 | **MANDATORY** | Temporal Extent - Begin date, End date | `extent`: {temporal`: { `interval`: [] | Collection |  |
 | **MANDATORY** | Geographical Extent - Bounding Box | `extent`: {spatial`: { `bbox`: [] | Collection/Item |  |
 | Optional | Vertical Extent - Minimun value, Maximum value | cube:dimensions.z.extent (datacube ext) | Collection | Datacube |
-| Optional | Supplemental Information | `description` (append) | Collection |  |
+| Optional | Supplemental Information | `iso:supplemental_information` | Collection |  |
 | **MANDATORY** | Distribution format |  | Asset |  |
 | Optional | Distribution format - Name |  | Asset |  |
 | **MANDATORY** | Data Quality - Lineage - Statement Description | `iso:lineage_statement` | Collection | Processing |
@@ -165,6 +165,7 @@ for each are in [`../README.md`](../README.md) and
 | `iso:use_constraints` | string (codelist) | Optional | `MD_LegalConstraints.useConstraints` (`MD_RestrictionCode`) |
 | `iso:use_limitation` | string | Optional | `MD_LegalConstraints.useLimitation` |
 | `iso:other_constraints` | string | Optional | `MD_LegalConstraints.otherConstraints` |
+| `iso:supplemental_information` | string | Optional | `MD_DataIdentification.supplementalInformation` |
 
 ## Role mapping (CI_RoleCode → STAC provider role)
 

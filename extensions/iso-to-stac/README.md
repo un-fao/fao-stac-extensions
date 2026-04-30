@@ -66,6 +66,7 @@ The `iso:*` fields defined by this extension. They can be used in:
 | iso:use_constraints | string | `MD_LegalConstraints.useConstraints` — `MD_RestrictionCode` value. |
 | iso:use_limitation | string | `MD_LegalConstraints.useLimitation` — free text. |
 | iso:other_constraints | string | `MD_LegalConstraints.otherConstraints` — free text. |
+| iso:supplemental_information | string | `MD_DataIdentification.supplementalInformation` — free text. |
 
 All fields are optional at the schema level. The FAO ISO 19115-1 profile
 imposes the additional requirements below.
@@ -98,6 +99,7 @@ fields specifically:
 | `iso:use_constraints` | Optional |
 | `iso:use_limitation` | Optional |
 | `iso:other_constraints` | Optional |
+| `iso:supplemental_information` | Optional |
 
 The schema does NOT enforce these requirements: profile checking is the
 responsibility of the validator, not the extension. Schema-level

@@ -9,6 +9,13 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Added
 
+- `iso:supplemental_information` field (Optional in the FAO profile)
+  for `MD_DataIdentification.supplementalInformation`. The source
+  spreadsheet recommended appending it to STAC `description`, which
+  loses the ISO/STAC round-trip; carrying it as a typed `iso:*` field
+  preserves both reads. The Collection example demonstrates a
+  realistic value (sentinel-value notes for ASI-D's pixel encoding).
+
 ### Changed
 
 - Mapping spec at `mapping/iso19115-2-to-stac.md`: header rewritten to

@@ -11,6 +11,11 @@ versioned CHANGELOG.
 
 ### Added
 
+- `iso:supplemental_information` field on `iso-to-stac` (Optional in
+  the FAO profile) covering `MD_DataIdentification.supplementalInformation`
+  — see the per-extension
+  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md). The two ASI-D
+  Collection examples now populate it.
 - Three new worked examples under `extensions/fao/examples/`:
   `collection-mosaic.json` (`L3-QUAL-NDVI-LT.LCE` MOSAIC tile),
   `collection-mosaicset.json` (`L3-RSM-D.KOG` MOSAICSET tile), and

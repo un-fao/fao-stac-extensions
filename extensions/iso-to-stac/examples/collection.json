@@ -63,6 +63,7 @@
   "iso:use_constraints": "license",
   "iso:use_limitation": "Attribution required per CC-BY-4.0; no warranty of fitness for any particular purpose.",
   "iso:other_constraints": "Use at your own risk. The producer is not liable for any damage arising from interpretation or downstream use of the data.",
+  "iso:supplemental_information": "Indicator values 251-254 are reserved sentinels (off-season, no-data, no-seasonality, no-cropland-or-grassland) and should be excluded from numerical analysis; see classification:classes on the data band for the full sentinel table.",
   "cube:dimensions": {
     "x": {"type": "spatial", "axis": "x", "extent": [-180.0, 180.0], "reference_system": 4326, "description": "Longitude (WGS84)"},
     "y": {"type": "spatial", "axis": "y", "extent": [-90.0, 90.0], "reference_system": 4326, "description": "Latitude (WGS84)"},

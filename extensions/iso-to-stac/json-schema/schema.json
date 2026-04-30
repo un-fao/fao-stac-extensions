@@ -122,6 +122,10 @@
         "iso:other_constraints": {
           "type": "string",
           "description": "ISO 19115-1 MD_LegalConstraints.otherConstraints. Free-text other constraints applying to the resource."
+        },
+        "iso:supplemental_information": {
+          "type": "string",
+          "description": "ISO 19115-1 MD_DataIdentification.supplementalInformation. Free-text supplemental information about the resource that does not fit elsewhere. Source spreadsheet recommended appending to STAC `description`; carrying it as a typed iso:* field preserves the ISO/STAC round-trip."
         }
       },
       "patternProperties": {
