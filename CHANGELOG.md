@@ -16,6 +16,16 @@ versioned CHANGELOG.
   — see the per-extension
   [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md). The two ASI-D
   Collection examples now populate it.
+- `extensions/iso-to-stac/mapping/iso19115-2-to-stac.md` reshaped
+  (sectioned by ISO 19115-1 area, one table per section, References
+  section linking out to upstream standards and the STAC Contacts /
+  Scientific / Themes / Language / Processing / Timestamps / Datacube /
+  Raster / EO extensions, OGC API - Records, pygeometa, GeoNetwork,
+  pystac). The GISMGR section was dropped from the crosswalk
+  (GISMGR-sourced fields go to standard STAC extensions; the
+  `gismgr_layer_id` platform identifier is documented in the `fao`
+  extension instead). See per-extension
+  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md).
 - Three new worked examples under `extensions/fao/examples/`:
   `collection-mosaic.json` (`L3-QUAL-NDVI-LT.LCE` MOSAIC tile),
   `collection-mosaicset.json` (`L3-RSM-D.KOG` MOSAICSET tile), and

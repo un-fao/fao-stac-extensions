@@ -15,14 +15,45 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
   loses the ISO/STAC round-trip; carrying it as a typed `iso:*` field
   preserves both reads. The Collection example demonstrates a
   realistic value (sentinel-value notes for ASI-D's pixel encoding).
+- Mapping doc gains a `References` section linking to the ISO
+  upstream standards (19115-1, 19115-2, 19139, the codelist registry),
+  to relevant STAC extensions (Contacts, Scientific, Themes,
+  Language, Processing, Timestamps, Datacube, Raster, EO) including
+  the [Contacts extension](https://github.com/stac-extensions/contacts)
+  as the recommended path for new producers, to OGC API - Records,
+  pygeometa, GeoNetwork, and pystac.
 
 ### Changed
 
-- Mapping spec at `mapping/iso19115-2-to-stac.md`: header rewritten to
-  describe its purpose as a per-field ISO ↔ STAC crosswalk, no longer
-  references the (uncommitted) source working document by filename.
+- **Mapping doc reshaped.** `mapping/iso19115-2-to-stac.md` is now
+  organised by ISO 19115-1 section (Identification & Citation; Date;
+  Maintenance / Status / Purpose; Constraints & Rights; Spatial &
+  Temporal Extent; Distribution & Resources; Quality & Lineage;
+  Metadata Block; Contacts) with one self-contained table per section
+  rather than a single monolithic 110-row table. Each row carries an
+  explicit Profile tier (no more empty cells inherited from the row
+  above) and a hyperlink to the contributing extension's repo. The
+  Contacts section now shows both the current FAO mapping
+  (`providers[]`) and the recommended STAC Contacts extension shape
+  (`contacts[]`) side-by-side.
+- Mapping doc: header rewritten to describe its purpose as a per-field
+  ISO ↔ STAC crosswalk, no longer references the (uncommitted) source
+  working document by filename.
 - README rewritten to lead with the motivation (merging the FAO ISO
   metadata catalog with the FAO STAC catalog).
+
+### Removed
+
+- Mapping doc: dropped the "Spatial Representation Info from GISMGR"
+  section and the `gismgr_layer_id` row. GISMGR is the FAO
+  raster-serving service and is not part of any standard; the rows
+  the spreadsheet placed under that header documented STAC fields
+  (bands, `cube:dimensions`, `cube:variables`, `renders`) sourced
+  from GISMGR — those are not ISO ↔ STAC mappings, so they don't
+  belong in this crosswalk. The platform identifier `gismgr_layer_id`
+  is replaced by the typed `fao:layer_id` field documented in the
+  [`fao` extension](../../fao/), with the dual-emit deprecation pattern
+  shown in that extension's examples.
 
 ### Deprecated
 
