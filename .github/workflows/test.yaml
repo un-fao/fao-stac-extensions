@@ -1,0 +1,24 @@
+name: Check Markdown, JSON Schemas, and Python tests
+on: [push, pull_request]
+jobs:
+  npm-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - uses: actions/checkout@v4
+      - run: |
+          npm install
+          npm test
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/checkout@v4
+      - run: |
+          cd reference-implementation
+          pip install -e .[dev]
+          pytest -q

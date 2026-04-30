@@ -1,0 +1,24 @@
+name: Publish JSON Schemas
+on:
+  release:
+    types: [published]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inject env variables
+        uses: rlespinasse/github-slug-action@v4.4.1
+      - uses: actions/checkout@v4
+      - name: Stage schemas for GitHub Pages
+        run: |
+          mkdir -p _site/fao _site/iso-to-stac
+          cp -R extensions/fao/json-schema/. _site/fao/
+          cp -R extensions/iso-to-stac/json-schema/. _site/iso-to-stac/
+      - name: Deploy JSON Schemas
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        env:
+          REF_SLUG: ${{ env.GITHUB_REF_SLUG }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _site
+          destination_dir: ${{ env.GITHUB_REF_SLUG }}

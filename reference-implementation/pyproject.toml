@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fao-stac-extensions"
+version = "0.1.0"
+description = "Reference implementation for the FAO STAC extensions (fao, iso-to-stac)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Carlo Cancellieri" }
+]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+]
+
+[project.urls]
+Homepage = "https://github.com/un-fao/fao-stac-extensions"
+Repository = "https://github.com/un-fao/fao-stac-extensions"
+Issues = "https://github.com/un-fao/fao-stac-extensions/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

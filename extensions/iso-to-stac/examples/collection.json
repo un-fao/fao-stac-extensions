@@ -1,0 +1,40 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/iso-to-stac/v1.0.0/schema.json"
+  ],
+  "type": "Collection",
+  "id": "collection",
+  "title": "ISO 19115-2 mapping placeholder collection",
+  "description": "Skeleton example. Real fields and the mapping table land in v0.2.0.",
+  "license": "Apache-2.0",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [172.9, 1.3, 173, 1.4]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        ["2015-06-23T00:00:00Z", null]
+      ]
+    }
+  },
+  "iso:placeholder": "skeleton",
+  "summaries": {
+    "datetime": {
+      "minimum": "2015-06-23T00:00:00Z",
+      "maximum": "2019-07-10T13:44:56Z"
+    }
+  },
+  "links": [
+    {
+      "href": "https://example.com/examples/collection.json",
+      "rel": "self"
+    },
+    {
+      "href": "https://example.com/examples/item.json",
+      "rel": "item"
+    }
+  ]
+}
