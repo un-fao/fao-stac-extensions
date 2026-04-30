@@ -51,6 +51,7 @@
   "fao:product_id": "ASI-D",
   "fao:layer_id": "ASIS.ASI-D",
   "fao:product_type": "mapset",
+  "gismgr_layer_id": "fao-gismgr/ASIS/mapsets/ASI-D",
   "iso:lineage_statement": "ASI is computed by integrating the Vegetation Health Index (VHI) over time and space using crop phenology and crop mask layers; values below the VHI=35 threshold are accumulated per administrative area to produce the percentage of stressed arable land.",
   "iso:maintenance_and_update_frequency": "asNeeded",
   "iso:spatial_representation_type": "grid",
@@ -88,8 +89,6 @@
     }
   },
   "summaries": {
-    "fao:workspace": ["ASIS"],
-    "fao:product_id": ["ASI-D"],
     "datetime": {
       "minimum": "1984-01-01T00:00:00Z",
       "maximum": "2026-04-20T00:00:00Z"

@@ -28,6 +28,18 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 - All Item examples now carry `fao:product_type: "map"` to demonstrate
   the convention.
+- Worked examples now emit the legacy `gismgr_item_id` (Item) and
+  `gismgr_layer_id` (Collection) alongside the new `fao:*` fields, to
+  demonstrate the deprecation pattern. The schema does not define
+  these legacy fields; they pass validation through the existing
+  `^(?!fao:)` pattern as untyped extras. README gains a "Migration &
+  deprecated legacy fields" section documenting which legacy fields
+  each new `fao:*` field replaces.
+- Removed redundant `fao:workspace` / `fao:product_id` / `proj:epsg`
+  entries from `summaries` blocks in Collection examples — these
+  values are invariant within a Collection, so top-level placement is
+  sufficient and matches the live FAO wire (which keeps `summaries`
+  empty for invariant fields).
 
 ### Deprecated
 

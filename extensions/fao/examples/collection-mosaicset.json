@@ -41,6 +41,7 @@
   "fao:product_id": "L3-RSM-D.KOG",
   "fao:layer_id": "WAPOR-3.L3-RSM-D",
   "fao:product_type": "mosaicset",
+  "gismgr_layer_id": "fao-gismgr/WAPOR-3/mosaicsets/L3-RSM-D",
   "iso:lineage_statement": "Relative root-zone soil moisture estimated by the WaPOR ET-Look model from satellite-derived radiation, evapotranspiration and soil parameters; calibrated against ground observations where available.",
   "iso:maintenance_and_update_frequency": "asNeeded",
   "iso:spatial_representation_type": "grid",
@@ -72,8 +73,6 @@
     }
   },
   "summaries": {
-    "fao:workspace": ["WAPOR-3"],
-    "fao:product_id": ["L3-RSM-D.KOG"],
     "proj:epsg": [32637]
   },
   "assets": {

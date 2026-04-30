@@ -36,6 +36,7 @@
     "fao:product_id": "ASI-D",
     "fao:item_code": "ASIS.ASI-D.2026-04-D2.GS2.LC-G",
     "fao:product_type": "map",
+    "gismgr_item_id": "fao-gismgr/ASIS/mapsets/ASI-D/ASIS.ASI-D.2026-04-D2.GS2.LC-G",
     "iso:spatial_representation_type": "grid",
     "proj:code": "EPSG:4326",
     "proj:bbox": [-180.004464, -56.004464292390026, 179.9955360576, 75.0044643],

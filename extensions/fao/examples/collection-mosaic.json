@@ -40,6 +40,7 @@
   "fao:product_id": "L3-QUAL-NDVI-LT.LCE",
   "fao:layer_id": "WAPOR-3.L3-QUAL-NDVI-LT",
   "fao:product_type": "mosaic",
+  "gismgr_layer_id": "fao-gismgr/WAPOR-3/mosaics/L3-QUAL-NDVI-LT",
   "iso:lineage_statement": "Per-pixel count of dekads with at least one valid NDVI observation, averaged over 2018-2023 from the WaPOR Sentinel-2-derived NDVI input series; expressed as percentage.",
   "iso:maintenance_and_update_frequency": "notPlanned",
   "iso:spatial_representation_type": "grid",
@@ -69,8 +70,6 @@
     }
   },
   "summaries": {
-    "fao:workspace": ["WAPOR-3"],
-    "fao:product_id": ["L3-QUAL-NDVI-LT.LCE"],
     "proj:epsg": [32633]
   },
   "assets": {

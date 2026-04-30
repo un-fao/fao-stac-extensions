@@ -88,6 +88,33 @@ This extension defines no new `rel` types. The link relations used by
 the FAO profile are STAC core (`describedby`, `license`, `via`, `style`,
 `legend`, `sld`, `self`, `parent`, `root`, `items`, `item`).
 
+## Migration & deprecated legacy fields
+
+The FAO platform's earlier wire format carried platform-internal
+identifiers under their original (un-prefixed) property names —
+notably `gismgr_item_id` on Items and `gismgr_layer_id` on Collections.
+This extension does **NOT** define those fields. Producers SHOULD
+emit them alongside the new typed `fao:*` fields during a deprecation
+window so existing consumers continue to work; the schema's
+`patternProperties` accepts any non-`fao:`-prefixed key, so the
+legacy fields validate without further configuration.
+
+| Legacy (deprecated) | Replaced by | Replacement is |
+| --- | --- | --- |
+| `properties.gismgr_item_id` (Item) | `fao:workspace`, `fao:product_id`, `fao:item_code`, `fao:product_type` (Item.properties) | typed fragments of the opaque legacy id |
+| `gismgr_layer_id` (Collection top-level) | `fao:workspace`, `fao:product_id`, `fao:layer_id`, `fao:product_type` (Collection top-level) | service-agnostic typed fields |
+
+The worked examples emit both the legacy and the new fields to
+demonstrate the migration. Once consumers have been updated, the
+producer can drop the legacy keys.
+
+Other v1 custom fields (`styleCode`, `downloadUrl`, `gsutilUri`,
+`fileSize`, `flags`, `dimensions`, `additionalInfo`, etc.) were
+already mapped to upstream STAC extensions during the v1→v2
+transition (`render`, core `assets`, `alternate-assets`, `file`,
+`classification`, `datacube`, `themes`, …) and are not re-introduced
+here.
+
 ## Contributing
 
 All contributions are subject to the
