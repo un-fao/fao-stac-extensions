@@ -13,6 +13,11 @@ versioned CHANGELOG.
 
 ### Changed
 
+- `extensions/iso-to-stac/mapping/iso19115-2-to-stac.md` regenerated
+  from source spreadsheet `_v2` — see the per-extension
+  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md). Documentation-only
+  change; no schema, field, or example impact.
+
 ### Deprecated
 
 ### Removed

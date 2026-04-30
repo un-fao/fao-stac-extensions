@@ -1,7 +1,7 @@
 # ISO 19115-1 ↔ STAC Mapping (FAO Profile)
 
 Normative mapping table for the FAO ISO 19115-1 profile, derived from
-the source spreadsheet (`ISO19115 vs STAC_Collection_300426_v1.xlsx`).
+the source spreadsheet (`ISO19115 vs STAC_Collection_300426_v2.xlsx`).
 
 ## Reading the table
 
@@ -54,9 +54,9 @@ the source spreadsheet (`ISO19115 vs STAC_Collection_300426_v1.xlsx`).
 | **MANDATORY** | Linkage URL | links[].href | Collection/Item |  |
 | **MANDATORY** | Name | links[].title | Collection/Item |  |
 | Optional | Description | links[].description | Collection/Item |  |
-|  | _(continued)_ | `created` | To specify the creation date of the data | Alternate assets |
-|  | _(continued)_ | `published` | To specify the publication date of the data |  |
-|  | _(continued)_ | `updated` | To specify the updated date of the data |  |
+|  | _(continued)_ | `created` | To specify the creation date of the data | Timestamp |
+|  | _(continued)_ | `published` | To specify the publication date of the data | Timestamp |
+|  | _(continued)_ | `updated` | To specify the updated date of the data | Timestamp |
 | | | **— WMTS —** | | |
 | **MANDATORY** | Linkage URL | links[].href | Collection/Item |  |
 | **MANDATORY** | Name | links[].title | Collection/Item |  |

@@ -11,11 +11,19 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Changed
 
+- Mapping spec at `mapping/iso19115-2-to-stac.md` regenerated from
+  source spreadsheet `_v2` (was `_v1`). Documentation-only change; no
+  schema, field, or example impact.
+
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+- LINKS to RESOURCES section: the `created` / `published` / `updated`
+  rows are now correctly attributed to the **Timestamps** extension
+  (not Alternate Assets, which was a v1 spreadsheet typo).
 
 ## [v0.2.0] — Initial field set + mapping spec
 
