@@ -90,7 +90,7 @@ date types that apply.
 | --- | --- | --- | --- | --- |
 | **MANDATORY** | License | `license` | Collection | core (use [SPDX](https://spdx.org/licenses/) identifier) |
 | Optional | Access Constraints | `iso:access_constraints` | Collection | this |
-| Optional | Use Constraints | `iso:use_constraints` | Collection | this |
+| Needed | Use Constraints | `iso:use_constraints` | Collection | this |
 | Optional | Use Limitation | `iso:use_limitation` | Collection | this |
 | Needed | Other Constraints | `iso:other_constraints` | Collection | this |
 
@@ -120,8 +120,8 @@ sub-rows describe the body of each entry.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Linkage URL | `assets[].href` (primary) or `links[].href` | Asset / Link | core |
-| **MANDATORY** | Name | `assets[].title` (primary) or `links[].title` | Asset / Link | core |
+| Needed | Linkage URL | `assets[].href` (primary) or `links[].href` | Asset / Link | core |
+| Needed | Name | `assets[].title` (primary) or `links[].title` | Asset / Link | core |
 | Optional | Description | `assets[].description` or `links[].description` | Asset / Link | core |
 |  | Date — Creation | `created` | Asset | [Timestamps](https://github.com/stac-extensions/timestamps) |
 |  | Date — Publication | `published` | Asset | Timestamps |
@@ -131,24 +131,24 @@ sub-rows describe the body of each entry.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Linkage URL | `links[].href` (`rel=tiles` or service-specific) | Link | core |
-| **MANDATORY** | Name | `links[].title` | Link | core |
+| Needed | Linkage URL | `links[].href` (`rel=tiles` or service-specific) | Link | core |
+| Needed | Name | `links[].title` | Link | core |
 | Optional | Description | `links[].description` | Link | core |
 
 ### 6.3. Licence link
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Linkage URL | `links[].href` (`rel=license`) | Link | core |
-| **MANDATORY** | Name | `links[].title` | Link | core |
+| Needed | Linkage URL | `links[].href` (`rel=license`) | Link | core |
+| Needed* | Name | `links[].title` | Link | core |
 | Optional | Description | `links[].description` | Link | core |
 
 ### 6.4. CKAN metadata link
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Linkage URL | `links[].href` (`rel=describedby`, `type=application/xml`) | Link | core |
-| **MANDATORY** | Name | `links[].title` | Link | core |
+| Needed | Linkage URL | `links[].href` (`rel=describedby`, `type=application/xml`) | Link | core |
+| Needed | Name | `links[].title` | Link | core |
 | Optional | Description | `links[].description` | Link | core |
 
 > **Asset alternative — the `iso-19115` role.** STAC core
