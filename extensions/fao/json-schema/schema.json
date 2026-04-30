@@ -13,7 +13,12 @@
           "required": ["type", "properties", "assets"],
           "properties": {
             "type": {"const": "Feature"},
-            "properties": {"$ref": "#/definitions/fields"},
+            "properties": {
+              "allOf": [
+                {"$ref": "#/definitions/fields"},
+                {"$ref": "#/definitions/modality_mutex"}
+              ]
+            },
             "assets": {
               "type": "object",
               "additionalProperties": {"$ref": "#/definitions/fields"}
@@ -30,7 +35,8 @@
           "required": ["type"],
           "properties": {"type": {"const": "Collection"}}
         },
-        {"$ref": "#/definitions/stac_extensions"}
+        {"$ref": "#/definitions/stac_extensions"},
+        {"$ref": "#/definitions/modality_mutex"}
       ],
       "anyOf": [
         {
@@ -73,8 +79,37 @@
         }
       }
     },
+    "modality_mutex": {
+      "$comment": "Raster-only and vector-only fao:* fields are mutually exclusive on the same object (Item.properties or Collection top-level).",
+      "allOf": [
+        {
+          "$comment": "If fao:product_type is present (raster), vector-only fields MUST NOT be present.",
+          "if": {"required": ["fao:product_type"]},
+          "then": {
+            "not": {
+              "anyOf": [
+                {"required": ["fao:geometry_type"]},
+                {"required": ["fao:feature_count"]}
+              ]
+            }
+          }
+        },
+        {
+          "$comment": "If a vector-only field is present, fao:product_type MUST NOT be present.",
+          "if": {
+            "anyOf": [
+              {"required": ["fao:geometry_type"]},
+              {"required": ["fao:feature_count"]}
+            ]
+          },
+          "then": {
+            "not": {"required": ["fao:product_type"]}
+          }
+        }
+      ]
+    },
     "fields": {
-      "$comment": "All fao:* fields are optional at the schema level.",
+      "$comment": "All fao:* fields are optional at the schema level. Raster-vs-vector mutex lives in #/definitions/modality_mutex and is applied at the points where fao:product_type and fao:geometry_type can co-exist (Item.properties, Collection top-level).",
       "type": "object",
       "properties": {
         "fao:workspace": {

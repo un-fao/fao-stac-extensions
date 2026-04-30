@@ -40,17 +40,27 @@ standards and to other community efforts in the same space.
 | --- | --- | --- | --- | --- |
 | **MANDATORY** | Title | `title` | Collection | core |
 | **MANDATORY** | Citation | `sci:citation` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
+| Optional | Citation Identifier (when DOI) | `sci:doi` | Collection | [Scientific Citation](https://github.com/stac-extensions/scientific) |
+| Optional | Citation Edition | `version` | Collection | [Versioning Indicators](https://github.com/stac-extensions/version) |
 | **MANDATORY** | Description | `description` | Collection | core |
 | **MANDATORY** | Theme Keywords | `keywords` | Collection | core |
 | **MANDATORY** | Temporal Keywords | `keywords` | Collection | core |
 | **MANDATORY** | Place Keywords | `keywords` | Collection | core |
-| **MANDATORY** | Topic Category | `themes` | Collection | [Themes](https://github.com/stac-extensions/themes) |
-| **MANDATORY** | Language | `language` | Collection | [Language](https://github.com/stac-extensions/language) |
+| **MANDATORY** | Topic Category | `themes` (with `scheme` set to ISO topic category codelist URI) | Collection | [Themes](https://github.com/stac-extensions/themes) |
+| **MANDATORY** | Language (resource — primary) | `language` | Collection | [Language](https://github.com/stac-extensions/language) |
+| Optional | Language (resource — additional) | `languages[]` | Collection | [Language](https://github.com/stac-extensions/language) |
 | Optional | Presentation Form | `iso:presentation_form` | Collection | this |
 | Optional | Character Set Code | `iso:character_set_code` | Collection | this |
 | Optional | Spatial Representation Type | `iso:spatial_representation_type` | Collection | this |
 | Optional | Purpose | `iso:purpose` | Collection | this |
 | Optional | Supplemental Information | `iso:supplemental_information` | Collection | this |
+
+> **Note on `language` vs `languages[]`** — ISO `MD_DataIdentification.language[]`
+> is an *array* of resource languages; the STAC Language extension splits this
+> into `language` (the primary) and `languages` (other available). OGC API -
+> Records introduces a separate `resourceLanguages` field for this use case;
+> STAC has not adopted that field. Producers SHOULD set `language` to the
+> primary resource language and emit `languages[]` for any others.
 
 ## 2. Date (referring to data)
 
@@ -137,21 +147,48 @@ sub-rows describe the body of each entry.
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Linkage URL | `links[].href` (`rel=describedby`, `type=application/xml`) | Link | core (uses the [`iso-19115` link role](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md) convention) |
+| **MANDATORY** | Linkage URL | `links[].href` (`rel=describedby`, `type=application/xml`) | Link | core |
 | **MANDATORY** | Name | `links[].title` | Link | core |
 | Optional | Description | `links[].description` | Link | core |
+
+> **Asset alternative — the `iso-19115` role.** STAC core
+> [best practices](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md)
+> define `iso-19115` as a standard *asset* role for an ISO 19115 metadata
+> file. If a producer prefers to expose the ISO metadata as an Asset
+> rather than a Link (e.g. when checksum / file-size information from the
+> [File Info extension](https://github.com/stac-extensions/file) is
+> useful), set `assets[<key>].roles` to `["metadata", "iso-19115"]` and
+> `assets[<key>].type` to `"application/xml"`. The FAO profile uses the
+> link form for back-compatibility with existing CKAN catalogues.
 
 ## 7. Quality & Lineage
 
 | Profile | ISO 19115-1 Field | STAC Field | Level | Extension |
 | --- | --- | --- | --- | --- |
-| **MANDATORY** | Data Quality — Lineage — Statement Description | `iso:lineage_statement` | Collection | this |
+| **MANDATORY** | Data Quality — Lineage — Statement Description | `processing:lineage` (preferred); `iso:lineage_statement` (fallback) | Collection or Provider | [Processing](https://github.com/stac-extensions/processing) |
 
-The STAC [Processing](https://github.com/stac-extensions/processing)
-extension defines `processing:lineage` as a per-provider lineage
-statement. The FAO profile uses `iso:lineage_statement` for the
-collection-level ISO lineage statement; producers MAY also emit
-`processing:lineage` per provider when applicable.
+> **Important — `processing:lineage` is the canonical home for ISO lineage
+> statements.** The STAC Processing extension explicitly cites
+> [NASA's ISO lineage information](https://wiki.earthdata.nasa.gov/display/NASAISO/Lineage+Information)
+> as the source of the `processing:lineage` definition, so an ISO
+> `LI_Lineage.statement` SHOULD be carried as `processing:lineage`. The
+> Processing extension allows the field at Collection top-level, Item
+> properties, and per-`providers[]` entry — pick the scope that matches
+> the lineage statement's scope in the source ISO record (typically
+> Collection-level for a dataset-wide statement; per-provider when
+> different parties contributed different processing steps).
+>
+> `iso:lineage_statement` is retained as a fallback for FAO producers
+> that need a strictly Collection-top-level field with an `iso:` prefix
+> for ISO-round-trip clarity. **New producers SHOULD prefer
+> `processing:lineage`.** The `iso:lineage_statement` field is a
+> candidate for deprecation in a future release of this extension.
+
+Related Processing extension fields that may apply: `processing:level`
+(processing-level short name), `processing:facility`, `processing:datetime`,
+`processing:version`, `processing:software`, plus the `derived_from`,
+`processing-execution`, `processing-software`, and `processing-validation`
+link relation types.
 
 ## 8. Metadata Block
 
@@ -186,24 +223,34 @@ resource point of contact.
 
 ### 9.1. Role mapping (`CI_RoleCode` → STAC role)
 
-The ISO `CI_RoleCode` codelist values map to STAC role values as
-follows. The mapping is the same whether the role applies to the
-metadata contact or to the resource point of contact, and whether the
-producer uses `providers[].roles[]` or `contacts[].roles[]`.
+ISO `CI_RoleCode` values map to STAC role values *differently* depending
+on whether the producer uses STAC core `providers[]` or the STAC
+[Contacts extension](https://github.com/stac-extensions/contacts):
 
-| ISO `CI_RoleCode` | STAC role |
-| --- | --- |
-| author | producer |
-| custodian | host |
-| distributor | host |
-| originator | producer |
-| owner | licensor |
-| pointOfContact | host |
-| principalInvestigator | producer |
-| processor | processor |
-| publisher | host |
-| resourceProvider | producer |
-| user | _no STAC equivalent — drop_ |
+- **`providers[].roles[]`** is constrained by STAC core to four values
+  (`licensor` / `producer` / `processor` / `host`). The mapping below is
+  therefore **lossy** — multiple ISO codes collapse into the same STAC
+  role.
+- **`contacts[].roles[]`** is `array of free-form strings` per the
+  Contacts extension schema. Producers SHOULD carry the ISO
+  `CI_RoleCode` value verbatim there for a **lossless** round-trip.
+
+The mapping is the same whether the role applies to the metadata
+contact or to the resource point of contact.
+
+| ISO `CI_RoleCode` | `providers[].roles[]` (lossy) | `contacts[].roles[]` (lossless) |
+| --- | --- | --- |
+| author | producer | author |
+| custodian | host | custodian |
+| distributor | host | distributor |
+| originator | producer | originator |
+| owner | licensor | owner |
+| pointOfContact | host | pointOfContact |
+| principalInvestigator | producer | principalInvestigator |
+| processor | processor | processor |
+| publisher | host | publisher |
+| resourceProvider | producer | resourceProvider |
+| user | _no STAC equivalent — drop_ | user |
 
 ---
 

@@ -23,6 +23,7 @@ dependencies = []
 [project.optional-dependencies]
 dev = [
     "pytest>=8",
+    "jsonschema>=4",
 ]
 
 [project.urls]

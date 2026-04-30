@@ -11,6 +11,46 @@ versioned CHANGELOG.
 
 ### Added
 
+- Community files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` (adopting
+  the STAC spec Code of Conduct), `SECURITY.md`, issue templates
+  (`.github/ISSUE_TEMPLATE/{bug_report,feature_request}.md`) and PR
+  template (`.github/pull_request_template.md`).
+- README badges (CI status, Apache-2.0 licence).
+- `docs/critical-review.md` — self-review of v0.2.0 documenting the
+  schema correctness fix, test coverage gap closure, mapping-quality
+  improvements based on standards review, and deferred follow-ups.
+- `reference-implementation/tests/test_examples.py` — schema-validation
+  tests in Python (mirrors the Node `stac-node-validator` job in CI).
+  Discovers every committed example and validates it against its
+  schema; asserts the modality-mutex rule catches synthetic
+  counter-examples.
+- `jsonschema>=4` added to `[dev]` extra in
+  `reference-implementation/pyproject.toml`.
+
+### Changed
+
+- `extensions/iso-to-stac/mapping/iso19115-2-to-stac.md`: standards-
+  review-driven mapping improvements — see the per-extension
+  [CHANGELOG](extensions/iso-to-stac/CHANGELOG.md). Highlights:
+  `processing:lineage` recommended over `iso:lineage_statement`
+  (the Processing extension explicitly cites NASA's ISO lineage
+  information as its source); new rows for `sci:doi` (Citation
+  identifier when DOI) and `version` (Citation edition); explicit
+  `language` vs `languages[]` distinction with OGC API - Records
+  `resourceLanguages` callout; `iso-19115` asset role documented as
+  the STAC core alternative to the `describedby` link form;
+  Contacts-extension role mapping clarified as lossless vs the lossy
+  `providers[]` mapping.
+
+### Fixed
+
+- `extensions/fao/json-schema/schema.json`: raster-vs-vector mutual
+  exclusivity was documented but not enforced. The mutex is now lifted
+  to a separate `#/definitions/modality_mutex` definition referenced
+  from `Item.properties` and from the Collection branch's outer
+  `allOf`, so Collections cannot satisfy the schema via the
+  `summaries` branch and bypass the mutex check.
+
 - `iso:supplemental_information` field on `iso-to-stac` (Optional in
   the FAO profile) covering `MD_DataIdentification.supplementalInformation`
   — see the per-extension

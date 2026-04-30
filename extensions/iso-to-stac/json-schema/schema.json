@@ -81,7 +81,7 @@
       "properties": {
         "iso:lineage_statement": {
           "type": "string",
-          "description": "ISO 19115-1 MD_DataIdentification.resourceLineage.LI_Lineage.statement. A human-readable statement describing the data's lineage."
+          "description": "ISO 19115-1 MD_DataIdentification.resourceLineage.LI_Lineage.statement. A human-readable statement describing the data's lineage. NOTE: New producers SHOULD prefer `processing:lineage` from the STAC Processing extension, which explicitly cites NASA's ISO lineage information as its source. This iso:* field is retained as a fallback for FAO producers that need a strictly Collection-top-level field with an iso: prefix; it is a candidate for deprecation in a future release."
         },
         "iso:maintenance_and_update_frequency": {
           "type": "string",

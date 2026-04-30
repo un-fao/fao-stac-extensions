@@ -23,6 +23,35 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
   as the recommended path for new producers, to OGC API - Records,
   pygeometa, GeoNetwork, and pystac.
 
+#### Standards-review-driven mapping improvements
+
+After reading the schemas of adjacent STAC extensions and STAC core's
+[best practices](https://github.com/radiantearth/stac-spec/blob/master/best-practices.md):
+
+- **Lineage**: `processing:lineage` is now recommended over
+  `iso:lineage_statement` for ISO `LI_Lineage.statement`. The
+  Processing extension explicitly cites NASA's ISO lineage
+  information as its source, so it is the de-facto STAC home for ISO
+  lineage. `iso:lineage_statement` is retained as a fallback for FAO
+  producers needing a strictly Collection-top-level field with an
+  `iso:` prefix; the schema description flags it as a candidate for
+  deprecation in a future release.
+- **DOI**: new mapping row for ISO `CI_Citation.identifier` (when
+  carrying a DOI) → `sci:doi` (Scientific Citation extension).
+- **Edition**: new mapping row for ISO `CI_Citation.edition` →
+  `version` (Versioning Indicators extension).
+- **Languages**: explicit `language` vs `languages[]` distinction with
+  a callout explaining the ISO multiplicity vs STAC's primary/other
+  split, and a pointer to OGC API - Records `resourceLanguages`.
+- **`iso-19115` asset role**: section 6.4 (CKAN metadata link) now
+  documents the STAC core asset alternative
+  (`assets[].roles = ["metadata", "iso-19115"]`) for producers that
+  prefer the asset form over `describedby` links.
+- **Contacts role mapping**: section 9.1 now distinguishes the lossy
+  `providers[].roles[]` mapping (constrained to STAC core's four role
+  values) from the lossless `contacts[].roles[]` mapping (the
+  Contacts extension permits free-form role strings).
+
 ### Changed
 
 - **Mapping doc reshaped.** `mapping/iso19115-2-to-stac.md` is now

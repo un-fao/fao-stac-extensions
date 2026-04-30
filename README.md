@@ -1,5 +1,8 @@
 # FAO STAC Extensions
 
+[![CI](https://github.com/un-fao/fao-stac-extensions/actions/workflows/test.yaml/badge.svg)](https://github.com/un-fao/fao-stac-extensions/actions/workflows/test.yaml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 Umbrella repository for STAC extensions authored and maintained by the
 Food and Agriculture Organization of the United Nations (FAO).
 
