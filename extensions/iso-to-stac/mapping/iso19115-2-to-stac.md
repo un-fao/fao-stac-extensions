@@ -92,7 +92,7 @@ date types that apply.
 | Optional | Access Constraints | `iso:access_constraints` | Collection | this |
 | Optional | Use Constraints | `iso:use_constraints` | Collection | this |
 | Optional | Use Limitation | `iso:use_limitation` | Collection | this |
-| Optional | Other Constraints | `iso:other_constraints` | Collection | this |
+| Needed | Other Constraints | `iso:other_constraints` | Collection | this |
 
 ## 5. Spatial & Temporal Extent
 
