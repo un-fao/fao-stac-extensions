@@ -47,6 +47,17 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Fixed
 
+- Schema now enforces raster-vs-vector mutual exclusivity. The
+  README documented the discipline since v0.2.0 but the schema
+  permitted documents carrying both `fao:product_type` (raster) and
+  `fao:geometry_type` / `fao:feature_count` (vector). A new
+  `#/definitions/modality_mutex` is referenced from `Item.properties`
+  and from the Collection branch's outer `allOf` so the mutex is
+  enforced regardless of which other anyOf branch matches. The
+  Python test suite gains
+  `test_fao_raster_vector_mutex_enforced` and
+  `test_fao_vector_only_document_validates` to lock the behaviour in.
+
 ## [v0.2.0] — Initial field set
 
 ### Added
