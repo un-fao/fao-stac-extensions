@@ -47,8 +47,8 @@
       "x": {"type": "spatial", "axis": "x", "extent": [-180.0, 179.9955360576], "step": 0.00892857143, "reference_system": 4326},
       "y": {"type": "spatial", "axis": "y", "extent": [-56.004464292390026, 75.0044643], "step": -0.00892857143, "reference_system": 4326}},
       "time": {"type": "temporal", "extent": ["2026-04-11T00:00:00Z", "2026-04-20T00:00:00Z"], "step": "P10D"},
-      "SEASON": {"type": "categorical", "values": ["GS2"], "description": "GISMGR ASIS:SEASON — Season 1"},
-      "LCT": {"type": "categorical", "values": ["LC-G"], "description": "GISMGR ASIS:LCT — Cropland"}
+      "SEASON": {"type": "categorical", "values": ["GS2"], "description": "GISMGR ASIS:SEASON — Season 2"},
+      "LCT": {"type": "categorical", "values": ["LC-G"], "description": "GISMGR ASIS:LCT — Grassland"}
     },
     "cube:variables": {
       "asi-d": {
@@ -67,7 +67,25 @@
         "colormap_name": "ASI-D-G",
         "resampling": "nearest"
       }
-    }
+    },
+   "bands": [
+        {
+          "name": "B1",
+          "description": "Agricultural Stress Index",
+          "data_type": "float32",
+          "nodata": 255,
+          "unit": "%",
+          "raster:scale": 1.0,
+          "raster:offset": 0.0,
+          "raster:spatial_resolution": 993.92,
+          "classification:classes": [
+            {"value": 251, "name": "off_season", "title": "Off season", "nodata": false},
+            {"value": 252, "name": "no_data", "title": "No data", "nodata": true},
+            {"value": 253, "name": "no_seasonality", "title": "No seasonality", "nodata": false},
+            {"value": 254, "name": "no_cropland_or_no_grassland", "title": "No cropland / no grassland", "nodata": false}
+          ]
+        }
+      ]
   },
   "assets": {
     "data": {
@@ -82,25 +100,7 @@
           "href": "https://example.org/mirror/data/ASIS.ASI-D.2026-04-D2.GS2.LC-G.tif",
           "title": "HTTPS mirror"
         }
-      },
-      "bands": [
-        {
-          "name": "B1",
-          "description": "Agricultural Stress Index",
-          "data_type": "float32",
-          "nodata": 255,
-          "unit": "%",
-          "raster:scale": 1.0,
-          "raster:offset": 0.0,
-          "raster:spatial_resolution": 993.92,
-          "classification:classes": [
-            {"value": 251, "name": "off_season", "title": "Off season", "nodata": false},
-            {"value": 252, "name": "no_data", "title": "No data", "nodata": false},
-            {"value": 253, "name": "no_seasonality", "title": "No seasonality", "nodata": false},
-            {"value": 254, "name": "no_cropland_or_no_grassland", "title": "No cropland / no grassland", "nodata": false}
-          ]
-        }
-      ]
+      }
     },
     "thumbnail": {
       "href": "https://example.org/assets/ASIS.ASI-D.2026-04-D2.GS2.LC-G.png",
