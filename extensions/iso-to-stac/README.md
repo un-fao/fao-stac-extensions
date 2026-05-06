@@ -88,8 +88,8 @@ fields specifically:
 
 | Field | Profile tier |
 | --- | --- |
-| `iso:lineage_statement` | **MANDATORY** |
-| `iso:maintenance_and_update_frequency` | **Needed** |
+| `iso:lineage_statement` | **Needed** |
+| `iso:maintenance_and_update_frequency` | **Mandatory** |
 | `iso:presentation_form` | Optional |
 | `iso:character_set_code` | Optional |
 | `iso:spatial_representation_type` | Optional |
