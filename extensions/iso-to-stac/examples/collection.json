@@ -50,7 +50,6 @@
       "roles": ["host"]
     }
   ],
-  
   "themes": [
     {
       "scheme": "https://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopicCategoryCode",
