@@ -79,6 +79,18 @@
       "$comment": "All iso:* fields are optional at the schema level. Required-ness is set by the profile (see README), not by the schema.",
       "type": "object",
       "properties": {
+       "iso:data_creation": {
+         "type": "string",
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [creation]. Data creation date"
+       },
+         "iso:data_revision": {
+         "type": "string",
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [revision]. Data revision date"
+       },
+         "iso:data_publication": {
+         "type": "string",
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [publication]. Data publication date"
+       },
         "iso:lineage_statement": {
           "type": "string",
           "description": "ISO 19115-1 MD_DataIdentification.resourceLineage.LI_Lineage.statement. A human-readable statement describing the data's lineage. NOTE: New producers SHOULD prefer `processing:lineage` from the STAC Processing extension, which explicitly cites NASA's ISO lineage information as its source. This iso:* field is retained as a fallback for FAO producers that need a strictly Collection-top-level field with an iso: prefix; it is a candidate for deprecation in a future release."
