@@ -79,17 +79,17 @@
       "$comment": "All iso:* fields are optional at the schema level. Required-ness is set by the profile (see README), not by the schema.",
       "type": "object",
       "properties": {
-       "iso:data_creation": {
+       "iso:data_creation_date": {
          "type": "string",
-         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [creation]. Data creation date"
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [creation]. Event used for reference date (creation)."
        },
-         "iso:data_revision": {
+         "iso:data_revision_date": {
          "type": "string",
-         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [revision]. Data revision date"
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [revision]. Event used for reference date (revision)."
        },
-         "iso:data_publication": {
+         "iso:data_publication_date": {
          "type": "string",
-         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [publication]. Data publication date"
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [publication]. Event used for reference date (publication)."
        },
         "iso:lineage_statement": {
           "type": "string",
