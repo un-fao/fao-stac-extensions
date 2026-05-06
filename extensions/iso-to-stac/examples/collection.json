@@ -172,7 +172,6 @@
     {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"},
     {"rel": "items", "type": "application/geo+json", "href": "https://example.org/stac/collections/ASI-D/items"},
     {"rel": "license", "type": "text/html", "title": "Creative Commons Attribution 4.0", "href": "https://creativecommons.org/licenses/by/4.0/"},
-    {"rel": "describedby", "type": "application/xml", "title": "Full metadata in ISO 19115 standard", "href": "https://example.org/iso/asi-d.xml"},
     {"rel": "aggregate", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D/aggregate"},
     {"rel": "aggregations", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D/aggregations"},
     {"rel": "canonical", "type": "application/json", "href": "https://data.review.fao.org/geospatial/search/stac/collections/ASI-D"},
