@@ -85,8 +85,7 @@
             {"value": 254, "name": "no_cropland_or_no_grassland", "title": "No cropland / no grassland", "nodata": false}
           ]
         }
-      ]
-  },
+   ],
   "assets": {
     "data": {
       "href": "https://example.org/data/ASIS.ASI-D.2026-04-D2.GS2.LC-G.tif",
