@@ -150,18 +150,27 @@ licence) at the top of the README.
 
 ## Findings deferred (not in this PR)
 
-- **JSON Schema `$id` URLs point at `stac-extensions.github.io/...`**
+- ~~**JSON Schema `$id` URLs point at `stac-extensions.github.io/...`**
   which only resolves after the extensions are accepted into the
   `stac-extensions/` GitHub organisation. The proper interim URL is
   the un-fao GitHub Pages deployment produced by `publish.yaml`. This
   was previously raised by the project lead and explicitly deferred;
-  flagging it here for visibility.
+  flagging it here for visibility.~~ **Resolved.** Both schemas now use
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/<ext>/json-schema/schema.json`.
+  The `fao` URL is permanent (org-specific extension, not community-
+  bound); the `iso-to-stac` URL is interim and moves to
+  `stac-extensions.github.io/iso-to-stac/...` on community acceptance.
+  Schemas are served directly from the git tree at the release tag —
+  the URLs resolve the moment the tag is pushed, no publish workflow
+  needed. `.github/workflows/publish.yaml` was removed.
 - **`.editorconfig`** — single-contributor repo, no immediate need.
 - **`py.typed`** — the reference-implementation package is essentially
   empty; no public API to type-check yet.
-- **Bumping `peaceiris/actions-gh-pages` from v3.9.3** — not security-
+- ~~**Bumping `peaceiris/actions-gh-pages` from v3.9.3** — not security-
   critical; will be picked up the next time the publish workflow needs
-  changes.
+  changes.~~ **Resolved.** `publish.yaml` removed (schemas served
+  directly from raw.githubusercontent.com at the release tag), so the
+  action is no longer used.
 
 ## Verification
 

@@ -1,7 +1,7 @@
 # ISO 19115-2 ↔ STAC Mapping Extension Specification
 
 - **Title:** ISO 19115-2 to STAC Mapping
-- **Identifier:** <https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json>
+- **Identifier:** <https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json> (interim; will move to `https://stac-extensions.github.io/iso-to-stac/...` when accepted upstream)
 - **Field Name Prefix:** iso
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal

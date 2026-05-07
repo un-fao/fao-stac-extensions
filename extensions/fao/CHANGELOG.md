@@ -26,6 +26,14 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Changed
 
+- Schema `$id` and `stac_extensions[]` URL moved from
+  `https://stac-extensions.github.io/fao/v0.2.0/schema.json` to
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json`.
+  The `fao` extension is org-specific and will not be submitted to the
+  `stac-extensions/` org, so this URL is the **permanent** identifier;
+  the previous URL only resolved aspirationally and broke client-side
+  validation. The schema is served directly from the git tree at the
+  release tag — no separate publish workflow.
 - All Item examples now carry `fao:product_type: "map"` to demonstrate
   the convention.
 - Worked examples now emit the legacy `gismgr_item_id` (Item) and
@@ -81,7 +89,9 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
   follow the `RASTER ONLY` / `VECTOR ONLY` discipline documented in
   the README. A future minor release may tighten this with a
   `dependentSchemas` clause once the field set is stable.
-- The schema URL is `https://stac-extensions.github.io/fao/v0.2.0/schema.json`.
+- The schema URL is `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json`
+  (served directly from the git tree at the release tag — the `fao`
+  extension is permanently org-specific).
 
 ## [v0.1.0] — Skeleton
 

@@ -54,6 +54,16 @@ After reading the schemas of adjacent STAC extensions and STAC core's
 
 ### Changed
 
+- Schema `$id` and `stac_extensions[]` URL moved from
+  `https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json` to
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json`.
+  This is an **interim** URL served directly from the umbrella
+  repository's git tree at the release tag, used while the extension is
+  at the Proposal / Pilot phase. Once accepted into the
+  `stac-extensions/` org the `$id` will move to
+  `https://stac-extensions.github.io/iso-to-stac/...` in a subsequent
+  release. Until then, this URL is the one client libraries
+  dereference for schema validation.
 - **Mapping doc reshaped.** `mapping/iso19115-2-to-stac.md` is now
   organised by ISO 19115-1 section (Identification & Citation; Date;
   Maintenance / Status / Purpose; Constraints & Rights; Spatial &
@@ -122,7 +132,9 @@ After reading the schemas of adjacent STAC extensions and STAC core's
 - The schema does NOT enforce profile-level required-ness. The Profile
   tiers (MANDATORY / Needed / Optional) are documented in the README
   and in the mapping doc; a separate validator MUST enforce them.
-- The schema URL is `https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json`.
+- The schema URL is `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json`
+  (interim — moves to `stac-extensions.github.io/iso-to-stac/...` on
+  community acceptance).
 
 ## [v0.1.0] — Skeleton
 

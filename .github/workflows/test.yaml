@@ -18,7 +18,13 @@ jobs:
         with:
           python-version: '3.12'
       - uses: actions/checkout@v4
-      - run: |
+      - name: Install reference-implementation
+        run: |
           cd reference-implementation
           pip install -e .[dev]
+      - name: Run pytest
+        run: |
+          cd reference-implementation
           pytest -q
+      - name: Validate examples with pystac (scoped gates the build; full-stack is informational)
+        run: python scripts/validate_with_pystac.py

@@ -24,6 +24,7 @@ dependencies = []
 dev = [
     "pytest>=8",
     "jsonschema>=4",
+    "pystac>=1.10",
 ]
 
 [project.urls]

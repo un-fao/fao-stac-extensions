@@ -64,12 +64,30 @@ pytest
 
 Each extension keeps its own versioned `CHANGELOG.md`. The umbrella
 repository also has a top-level `CHANGELOG.md` summarising
-cross-extension changes. Schema URLs follow the pattern
-`https://stac-extensions.github.io/<name>/v<version>/schema.json` after
-acceptance into the
-[`stac-extensions` GitHub organisation](https://github.com/stac-extensions);
-prior to acceptance, schemas are served from the un-fao GitHub Pages
-deployment created by `.github/workflows/publish.yaml`.
+cross-extension changes.
+
+Schema URLs by extension:
+
+- **`fao`** — permanent URL
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v<version>/extensions/fao/json-schema/schema.json`,
+  served directly from the git tree at the release tag. The `fao`
+  extension is org-specific and is **not** a candidate for the
+  `stac-extensions/` org, so this URL does not change on community
+  acceptance — there is none.
+- **`iso-to-stac`** — interim URL
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v<version>/extensions/iso-to-stac/json-schema/schema.json`
+  while the extension is at the Proposal / Pilot phase. After
+  acceptance into the
+  [`stac-extensions` GitHub organisation](https://github.com/stac-extensions)
+  the `$id` will move to
+  `https://stac-extensions.github.io/iso-to-stac/v<version>/schema.json`
+  in a subsequent release.
+
+Both URLs resolve the moment the version tag (e.g. `v0.2.0`) is pushed
+to GitHub — no separate publish workflow is required. Client libraries
+can fetch the schema directly without configuring a local `--schemaMap`.
+GitHub serves these with `Content-Type: text/plain; charset=utf-8`,
+which `pystac` and `jsonschema` both handle.
 
 ## Avoiding personal data
 

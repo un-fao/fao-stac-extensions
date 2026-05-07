@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/fao/v0.2.0/schema.json#",
+  "$id": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json#",
   "title": "FAO Extension",
   "description": "FAO platform-specific fields for STAC Items and Collections published by the FAO Agro-Informatics Platform. Covers raster and vector products under one namespace.",
   "oneOf": [
@@ -75,7 +75,7 @@
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {"const": "https://stac-extensions.github.io/fao/v0.2.0/schema.json"}
+          "contains": {"const": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json"}
         }
       }
     },

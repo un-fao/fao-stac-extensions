@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json#",
+  "$id": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json#",
   "title": "ISO 19115-2 to STAC Mapping Extension",
   "description": "Defines the mapping from ISO 19115-2 metadata to STAC and adds iso:* fields for ISO concepts that have no equivalent in any existing STAC extension.",
   "oneOf": [
@@ -71,7 +71,7 @@
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {"const": "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json"}
+          "contains": {"const": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json"}
         }
       }
     },

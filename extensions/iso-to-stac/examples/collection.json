@@ -4,8 +4,8 @@
   "stac_extensions": [
     "https://stac-extensions.github.io/classification/v2.0.0/schema.json",
     "https://stac-extensions.github.io/datacube/v2.3.0/schema.json",
-    "https://stac-extensions.github.io/fao/v0.2.0/schema.json",
-    "https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json",
+    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json",
+    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json",
     "https://stac-extensions.github.io/language/v1.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/raster/v2.0.0/schema.json",
@@ -165,10 +165,11 @@
         "roles": ["via"]
       },
     "iso19115": {
-        "href": "https://data.apps.fao.org/catalog/dataset/a3746625-5871-46cd-b74f-86890bf0fbe2",
-        "type": "application/xml",
-        "title": "Full metadata in ISO-19115 standard",
-        "roles": ["metadata"]
+      "href": "https://data.apps.fao.org/catalog/dataset/a3746625-5871-46cd-b74f-86890bf0fbe2",
+      "type": "application/xml",
+      "title": "Full metadata in ISO-19115 standard",
+      "roles": ["metadata"]
+    }
   },
   "links": [
     {"rel": "self", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D"},
@@ -180,5 +181,4 @@
     {"rel": "canonical", "type": "application/json", "href": "https://data.review.fao.org/geospatial/search/stac/collections/ASI-D"},
     {"rel": "queryables", "type": "application/schema+json", "href": "https://example.org/stac/collections/ASI-D/queryables"}
   ]
-}
 }

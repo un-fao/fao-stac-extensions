@@ -37,10 +37,10 @@ extensions.
 
 ## Extensions
 
-| Extension | Field prefix | Status | Description |
-| --- | --- | --- | --- |
-| [`fao`](extensions/fao/) | `fao` | Proposal — initial field set (v0.2.0) | FAO platform-specific fields applicable to both raster and vector products published by the FAO Agro-Informatics Platform. |
-| [`iso-to-stac`](extensions/iso-to-stac/) | `iso` | Proposal — initial field set (v0.2.0) | Canonical mapping between ISO 19115-2 and STAC, plus the FAO ISO 19115-1 profile. Adds `iso:*` fields only where no existing extension covers the ISO concept. |
+| Extension | Field prefix | Status | Schema URL | Description |
+| --- | --- | --- | --- | --- |
+| [`fao`](extensions/fao/) | `fao` | **Custom** — org-specific, permanent (v0.2.0) | `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json` | FAO platform-specific fields applicable to both raster and vector products published by the FAO Agro-Informatics Platform. Not a candidate for the `stac-extensions/` org. |
+| [`iso-to-stac`](extensions/iso-to-stac/) | `iso` | Proposal — initial field set (v0.2.0); candidate for community acceptance | `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json` (interim) | Canonical mapping between ISO 19115-2 and STAC, plus the FAO ISO 19115-1 profile. Adds `iso:*` fields only where no existing extension covers the ISO concept. |
 
 ## Repository Layout
 
@@ -58,7 +58,11 @@ fao-stac-extensions/
 
 ## Standardization Pathway
 
-Each extension follows the same lifecycle, mirroring the sibling
+The two extensions follow different paths.
+
+### `iso-to-stac` — community-bound
+
+Mirrors the sibling
 [`ogc-dimensions`](https://github.com/ccancellieri/ogc-dimensions) FAO
 proposal:
 
@@ -69,9 +73,21 @@ proposal:
 | Candidate | PR to the `stac-extensions/` org index |
 | Stable | After at least one external implementer adopts |
 
-For `iso-to-stac` specifically, coordination with the OGC Metadata SWG
-(ISO TC 211 liaison) runs in parallel — there is no existing STAC ↔ ISO
-19115 mapping extension, which is the gap this fills.
+Coordination with the OGC Metadata SWG (ISO TC 211 liaison) runs in
+parallel — there is no existing STAC ↔ ISO 19115 mapping extension,
+which is the gap this fills. On acceptance the `$id` URL moves from
+`https://raw.githubusercontent.com/un-fao/fao-stac-extensions/...` to
+`https://stac-extensions.github.io/iso-to-stac/...`.
+
+### `fao` — permanent custom extension
+
+The `fao` extension is intentionally org-specific (workspace, product
+identifiers, FAO product-type classifier) and **is not a candidate for
+the `stac-extensions/` org**. Its schema is served directly from this
+repository, version-pinned to the release tag, in perpetuity. This
+matches STAC's guidance that extensions of strictly local interest to
+one publisher remain custom rather than being submitted to the
+community index.
 
 ## Running Tests
 
