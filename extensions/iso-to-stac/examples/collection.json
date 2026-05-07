@@ -15,44 +15,73 @@
   "title": "Agricultural Stress Index — Dekadal — Global 1km",
   "description": "Agricultural Stress Index (ASI) — Dekadal product. ASI depicts the percentage of arable land within an administrative area that has been affected by drought conditions from the start of the season up to the current dekad. This example illustrates the FAO ISO 19115-1 STAC profile end-to-end: every iso:* field is populated, alongside fao:* identifiers and fields contributed by the standard extensions listed in stac_extensions.",
   "extent": {
-    "spatial": {"bbox": [[-180.0, -56.0, 180.0, 75.0]]},
-    "temporal": {"interval": [["1984-01-01T00:00:00Z", "2026-04-20T00:00:00Z"]]}
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -56,
+          180,
+          75
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1984-01-01T00:00:00Z",
+          "2026-04-20T00:00:00Z"
+        ]
+      ]
+    }
   },
   "license": "CC-BY-4.0",
-  "language": {"code": "en", "name": "English"},
+  "language": {
+    "code": "en",
+    "name": "English"
+  },
   "keywords": [
     "Agricultural Stress Index",
-      "Agricultural Drought",
-      "Crop growing condition",
-      "Early Warning System",
-      "Vegetatation Index",
-      "Seasonal drought index",
-      "ASI",
-      "HiH_ASIS",
-      "HiH_GIEWS_OB",
-      "Global",
-      "Countries",
-      "Continents",
-      "Dekadal"
+    "Agricultural Drought",
+    "Crop growing condition",
+    "Early Warning System",
+    "Vegetatation Index",
+    "Seasonal drought index",
+    "ASI",
+    "HiH_ASIS",
+    "HiH_GIEWS_OB",
+    "Global",
+    "Countries",
+    "Continents",
+    "Dekadal"
   ],
   "providers": [
-   {
-        "name": "FAO-UN-Surname Name",
-        "description": "Resource point of contact: name.surname@sample.org",
-        "roles": ["producer"]
-      },
+    {
+      "name": "FAO-UN-Surname Name",
+      "description": "Resource point of contact: name.surname@sample.org",
+      "roles": [
+        "producer"
+      ]
+    },
     {
       "name": "FAO-UN-Global Information and Early Warning System (GIEWS)",
       "description": "Metadata point of contact: giews1@example.org.",
-      "roles": ["host"]
+      "roles": [
+        "host"
+      ]
     }
   ],
   "themes": [
     {
       "scheme": "https://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopicCategoryCode",
       "concepts": [
-        {"id": "farming", "title": "Farming"},
-        {"id": "biota", "title": "Biota"}
+        {
+          "id": "farming",
+          "title": "Farming"
+        },
+        {
+          "id": "biota",
+          "title": "Biota"
+        }
       ]
     }
   ],
@@ -80,16 +109,62 @@
   "fao:product_type": "mapset",
   "gismgr_layer_id": "fao-gismgr/ASIS/mapsets/ASI-D",
   "cube:dimensions": {
-    "x": {"type": "spatial", "axis": "x", "extent": [-180.0, 180.0], "reference_system": 4326, "description": "Longitude (WGS84)"},
-    "y": {"type": "spatial", "axis": "y", "extent": [-90.0, 90.0], "reference_system": 4326, "description": "Latitude (WGS84)"},
-    "time": {"type": "temporal", "extent": ["1984-01-01T00:00:00Z", "2026-04-20T00:00:00Z"], "step": "P10D", "description": "Dekad"},
-    "SEASON": {"type": "categorical", "values": ["GS1", "GS2"], "description": "Growing Season"},
-    "LCT": {"type": "categorical", "values": ["LC-C", "LC-G"], "description": "Land Cover Type"}
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "extent": [
+        -180,
+        180
+      ],
+      "reference_system": 4326,
+      "description": "Longitude (WGS84)"
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "extent": [
+        -90,
+        90
+      ],
+      "reference_system": 4326,
+      "description": "Latitude (WGS84)"
+    },
+    "time": {
+      "type": "temporal",
+      "extent": [
+        "1984-01-01T00:00:00Z",
+        "2026-04-20T00:00:00Z"
+      ],
+      "step": "P10D",
+      "description": "Dekad"
+    },
+    "SEASON": {
+      "type": "categorical",
+      "values": [
+        "GS1",
+        "GS2"
+      ],
+      "description": "Growing Season"
+    },
+    "LCT": {
+      "type": "categorical",
+      "values": [
+        "LC-C",
+        "LC-G"
+      ],
+      "description": "Land Cover Type"
+    }
   },
   "cube:variables": {
     "asi-d": {
       "type": "data",
-      "dimensions": ["x", "y", "time", "SEASON", "LCT"],
+      "dimensions": [
+        "x",
+        "y",
+        "time",
+        "SEASON",
+        "LCT"
+      ],
       "description": "Agricultural Stress Index",
       "unit": "%",
       "nodata": 255,
@@ -99,7 +174,9 @@
   "renders": {
     "data": {
       "title": "Agricultural Stress Index",
-      "assets": ["data"],
+      "assets": [
+        "data"
+      ],
       "colormap_name": "ASI-D-G",
       "resampling": "nearest"
     }
@@ -110,72 +187,125 @@
       "href": "https://example.org/assets/asi-d-thumbnail.png",
       "type": "image/png",
       "title": "Graphic overview",
-      "roles": ["thumbnail"]
+      "roles": [
+        "thumbnail"
+      ]
     },
     "wmts": {
-        "href": "https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/ASIS/mapsets/ASI-D&tilematrixset=EPSG:900913&Service=WMTS&request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={y}&TileRow={x}&layertype=Image",
-        "type": "image/png",
-        "title": "OGC WMTS tile template",
-        "description": "WMTS tile URL template in EPSG:900913 for rendered PNG tiles. Substitute {z}/{x}/{y} per client conventions.",
-        "roles": ["visual", "tiles"]
-      },
+      "href": "https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/ASIS/mapsets/ASI-D&tilematrixset=EPSG:900913&Service=WMTS&request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={y}&TileRow={x}&layertype=Image",
+      "type": "image/png",
+      "title": "OGC WMTS tile template",
+      "description": "WMTS tile URL template in EPSG:900913 for rendered PNG tiles. Substitute {z}/{x}/{y} per client conventions.",
+      "roles": [
+        "visual",
+        "tiles"
+      ]
+    },
     "dimension-labels": {
       "href": "https://example.org/assets/asi-d-dimension-labels.json",
       "type": "application/json",
       "title": "Dimension label translations",
       "description": "Human-readable labels for the SEASON and LCT categorical members of cube:dimensions.",
-      "roles": ["metadata", "dimension-labels"]
+      "roles": [
+        "metadata",
+        "dimension-labels"
+      ]
     },
-      "sld-asi-d-c": {
-        "href": "https://data.apps.fao.org/gismgr/api/v2/catalog/workspaces/ASIS/styles/ASI-D-C/sld",
-        "type": "application/vnd.ogc.sld+xml",
-        "title": "SLD — ASI-D-C",
-        "description": "OGC Styled Layer Descriptor.",
-        "roles": ["style"]
-      },
-      "sld-asi-d-g": {
-        "href": "https://data.apps.fao.org/gismgr/api/v2/catalog/workspaces/ASIS/styles/ASI-D-G/sld",
-        "type": "application/vnd.ogc.sld+xml",
-        "title": "SLD — ASI-D-G",
-        "description": "OGC Styled Layer Descriptor.",
-        "roles": ["style"]
-      },
+    "sld-asi-d-c": {
+      "href": "https://data.apps.fao.org/gismgr/api/v2/catalog/workspaces/ASIS/styles/ASI-D-C/sld",
+      "type": "application/vnd.ogc.sld+xml",
+      "title": "SLD — ASI-D-C",
+      "description": "OGC Styled Layer Descriptor.",
+      "roles": [
+        "style"
+      ]
+    },
+    "sld-asi-d-g": {
+      "href": "https://data.apps.fao.org/gismgr/api/v2/catalog/workspaces/ASIS/styles/ASI-D-G/sld",
+      "type": "application/vnd.ogc.sld+xml",
+      "title": "SLD — ASI-D-G",
+      "description": "OGC Styled Layer Descriptor.",
+      "roles": [
+        "style"
+      ]
+    },
     "docs-gcs": {
-        "href": "https://www.fao.org/giews/earthobservation/asis/data/ref/ASIS_GCS.pdf",
-        "type": "application/pdf",
-        "title": "ASIS datasets on Google Cloud Storage",
-        "description": "From January 2026, FAO ASIS datasets are managed by GISMGR2. This is a short description of the datasets stored on Google Cloud Storage. ",
-        "roles": ["metadata"]
-      },
-      "docs-gee": {
-        "href": "https://www.fao.org/giews/earthobservation/asis/data/ref/ASIS_GEE_AdjustmentNote_2026.pdf",
-        "type": "application/pdf",
-        "title": "ASIS GEE Assets 2026 Migration Note",
-        "description": "Due to recent FAO backend geospatial infrastructure upgrade, ASIS assets on GEE need to be adjusted accordingly. The main changes involve the naming of the ImageCollection IDs and the Image IDs within each ImageCollection. These changes take effect on 20 January 2026. The update of the old assets has been stopped and the archive will be deleted by the end of March.",
-        "roles": ["metadata"]
-      },
+      "href": "https://www.fao.org/giews/earthobservation/asis/data/ref/ASIS_GCS.pdf",
+      "type": "application/pdf",
+      "title": "ASIS datasets on Google Cloud Storage",
+      "description": "From January 2026, FAO ASIS datasets are managed by GISMGR2. This is a short description of the datasets stored on Google Cloud Storage. ",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "docs-gee": {
+      "href": "https://www.fao.org/giews/earthobservation/asis/data/ref/ASIS_GEE_AdjustmentNote_2026.pdf",
+      "type": "application/pdf",
+      "title": "ASIS GEE Assets 2026 Migration Note",
+      "description": "Due to recent FAO backend geospatial infrastructure upgrade, ASIS assets on GEE need to be adjusted accordingly. The main changes involve the naming of the ImageCollection IDs and the Image IDs within each ImageCollection. These changes take effect on 20 January 2026. The update of the old assets has been stopped and the archive will be deleted by the end of March.",
+      "roles": [
+        "metadata"
+      ]
+    },
     "website": {
-        "href": "http://www.fao.org/giews/earthobservation/asis/index_1.jsp?lang=en",
-        "type": "text/html",
-        "title": "Agricultural Stress Index (ASIS)-Near Real Time",
-        "description": "Official website",
-        "roles": ["via"]
-      },
+      "href": "http://www.fao.org/giews/earthobservation/asis/index_1.jsp?lang=en",
+      "type": "text/html",
+      "title": "Agricultural Stress Index (ASIS)-Near Real Time",
+      "description": "Official website",
+      "roles": [
+        "via"
+      ]
+    },
     "iso19115": {
       "href": "https://data.apps.fao.org/catalog/dataset/a3746625-5871-46cd-b74f-86890bf0fbe2",
       "type": "application/xml",
       "title": "Full metadata in ISO-19115 standard",
-      "roles": ["metadata"]
+      "roles": [
+        "metadata"
+      ]
     }
   },
   "links": [
-    {"rel": "self", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D"},
-    {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"},
-    {"rel": "items", "type": "application/geo+json", "href": "https://example.org/stac/collections/ASI-D/items"},
-    {"rel": "license", "type": "text/html", "title": "Creative Commons Attribution 4.0", "href": "https://creativecommons.org/licenses/by/4.0/"},
-    {"rel": "aggregate", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D/aggregate"},
-    {"rel": "aggregations", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D/aggregations"},
-    {"rel": "canonical", "type": "application/json", "href": "https://data.review.fao.org/geospatial/search/stac/collections/ASI-D"},
-    {"rel": "queryables", "type": "application/schema+json", "href": "https://example.org/stac/collections/ASI-D/queryables"}
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "https://example.org/stac/collections/ASI-D"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://example.org/stac/"
+    },
+    {
+      "rel": "items",
+      "type": "application/geo+json",
+      "href": "https://example.org/stac/collections/ASI-D/items"
+    },
+    {
+      "rel": "license",
+      "type": "text/html",
+      "title": "Creative Commons Attribution 4.0",
+      "href": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "rel": "aggregate",
+      "type": "application/json",
+      "href": "https://example.org/stac/collections/ASI-D/aggregate"
+    },
+    {
+      "rel": "aggregations",
+      "type": "application/json",
+      "href": "https://example.org/stac/collections/ASI-D/aggregations"
+    },
+    {
+      "rel": "canonical",
+      "type": "application/json",
+      "href": "https://data.review.fao.org/geospatial/search/stac/collections/ASI-D"
+    },
+    {
+      "rel": "queryables",
+      "type": "application/schema+json",
+      "href": "https://example.org/stac/collections/ASI-D/queryables"
+    }
   ]
 }

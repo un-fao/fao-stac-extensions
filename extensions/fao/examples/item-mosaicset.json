@@ -12,16 +12,38 @@
   ],
   "id": "WAPOR-3.L3-RSM-D.KOG.2025-12-D3",
   "collection": "L3-RSM-D.KOG",
-  "bbox": [36.98262460576828, 11.302975968081904, 37.263384246053306, 11.551545049372422],
+  "bbox": [
+    36.98262460576828,
+    11.302975968081904,
+    37.263384246053306,
+    11.551545049372422
+  ],
   "geometry": {
     "type": "Polygon",
-    "coordinates": [[
-      [37.263384246053306, 11.302975968081904],
-      [37.263384246053306, 11.551545049372422],
-      [36.98262460576828, 11.551545049372422],
-      [36.98262460576828, 11.302975968081904],
-      [37.263384246053306, 11.302975968081904]
-    ]]
+    "coordinates": [
+      [
+        [
+          37.263384246053306,
+          11.302975968081904
+        ],
+        [
+          37.263384246053306,
+          11.551545049372422
+        ],
+        [
+          36.98262460576828,
+          11.551545049372422
+        ],
+        [
+          36.98262460576828,
+          11.302975968081904
+        ],
+        [
+          37.263384246053306,
+          11.302975968081904
+        ]
+      ]
+    ]
   },
   "properties": {
     "datetime": null,
@@ -35,18 +57,58 @@
     "fao:product_type": "map",
     "gismgr_item_id": "fao-gismgr/WAPOR-3/mosaicsets/L3-RSM-D.KOG/WAPOR-3.L3-RSM-D.KOG.2025-12-D3",
     "proj:code": "EPSG:32637",
-    "proj:bbox": [279800.0, 1250240.0, 310620.0, 1277540.0],
-    "proj:transform": [279800.0, 20.0, 0.0, 1277540.0, 0.0, -20.0],
-    "proj:shape": [1365, 1541],
+    "proj:bbox": [
+      279800,
+      1250240,
+      310620,
+      1277540
+    ],
+    "proj:transform": [
+      279800,
+      20,
+      0,
+      1277540,
+      0,
+      -20
+    ],
+    "proj:shape": [
+      1365,
+      1541
+    ],
     "cube:dimensions": {
-      "x": {"type": "spatial", "axis": "x", "extent": [36.98262460576828, 37.263384246053306]},
-      "y": {"type": "spatial", "axis": "y", "extent": [11.302975968081904, 11.551545049372422]},
-      "time": {"type": "temporal", "extent": ["2025-12-21T00:00:00Z", "2025-12-31T00:00:00Z"], "step": "P11D"}
+      "x": {
+        "type": "spatial",
+        "axis": "x",
+        "extent": [
+          36.98262460576828,
+          37.263384246053306
+        ]
+      },
+      "y": {
+        "type": "spatial",
+        "axis": "y",
+        "extent": [
+          11.302975968081904,
+          11.551545049372422
+        ]
+      },
+      "time": {
+        "type": "temporal",
+        "extent": [
+          "2025-12-21T00:00:00Z",
+          "2025-12-31T00:00:00Z"
+        ],
+        "step": "P11D"
+      }
     },
     "cube:variables": {
       "l3-rsm-d": {
         "type": "data",
-        "dimensions": ["x", "y", "time"],
+        "dimensions": [
+          "x",
+          "y",
+          "time"
+        ],
         "description": "Relative Soil Moisture",
         "unit": "%",
         "nodata": -9999,
@@ -56,7 +118,9 @@
     "renders": {
       "data": {
         "title": "Relative Soil Moisture",
-        "assets": ["data"],
+        "assets": [
+          "data"
+        ],
         "colormap_name": "RSM-D",
         "resampling": "average"
       }
@@ -68,7 +132,9 @@
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Cloud Optimized GeoTIFF",
       "description": "Relative Soil Moisture",
-      "roles": ["data"],
+      "roles": [
+        "data"
+      ],
       "file:size": 3462892,
       "bands": [
         {
@@ -78,8 +144,8 @@
           "nodata": -9999,
           "unit": "%",
           "raster:scale": 0.001,
-          "raster:offset": 0.0,
-          "raster:spatial_resolution": 20.0
+          "raster:offset": 0,
+          "raster:spatial_resolution": 20
         }
       ]
     },
@@ -87,13 +153,31 @@
       "href": "https://example.org/assets/WAPOR-3.L3-RSM-D.KOG.2025-12-D3.png",
       "type": "image/png",
       "title": "Thumbnail",
-      "roles": ["thumbnail"]
+      "roles": [
+        "thumbnail"
+      ]
     }
   },
   "links": [
-    {"rel": "self", "type": "application/geo+json", "href": "https://example.org/stac/collections/L3-RSM-D.KOG/items/WAPOR-3.L3-RSM-D.KOG.2025-12-D3"},
-    {"rel": "parent", "type": "application/json", "href": "https://example.org/stac/collections/L3-RSM-D.KOG"},
-    {"rel": "collection", "type": "application/json", "href": "https://example.org/stac/collections/L3-RSM-D.KOG"},
-    {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"}
+    {
+      "rel": "self",
+      "type": "application/geo+json",
+      "href": "https://example.org/stac/collections/L3-RSM-D.KOG/items/WAPOR-3.L3-RSM-D.KOG.2025-12-D3"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "https://example.org/stac/collections/L3-RSM-D.KOG"
+    },
+    {
+      "rel": "collection",
+      "type": "application/json",
+      "href": "https://example.org/stac/collections/L3-RSM-D.KOG"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://example.org/stac/"
+    }
   ]
 }

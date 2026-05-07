@@ -15,7 +15,10 @@
   "title": "Agricultural Stress Index — Dekadal — Global 1km",
   "description": "Agricultural Stress Index (ASI) — Dekadal product. ASI depicts the percentage of arable land within an administrative area that has been affected by drought conditions from the start of the season up to the current dekad. This example illustrates the FAO ISO 19115-1 STAC profile end-to-end: it carries fao:* identifiers, iso:* metadata fields, and fields contributed by the standard extensions listed in stac_extensions.",
   "license": "CC-BY-4.0",
-  "language": {"code": "en", "name": "English"},
+  "language": {
+    "code": "en",
+    "name": "English"
+  },
   "keywords": [
     "Agricultural Stress Index",
     "Drought",
@@ -27,19 +30,44 @@
     {
       "name": "FAO Global Information and Early Warning System",
       "description": "Producer and metadata point of contact (giews1@example.org).",
-      "roles": ["producer", "host"]
+      "roles": [
+        "producer",
+        "host"
+      ]
     }
   ],
   "extent": {
-    "spatial": {"bbox": [[-180.0, -56.0, 180.0, 75.0]]},
-    "temporal": {"interval": [[ "1984-01-01T00:00:00Z", null ]]}
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -56,
+          180,
+          75
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1984-01-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
   },
   "themes": [
     {
       "scheme": "https://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopicCategoryCode",
       "concepts": [
-        {"id": "farming", "title": "Farming"},
-        {"id": "biota", "title": "Biota"}
+        {
+          "id": "farming",
+          "title": "Farming"
+        },
+        {
+          "id": "biota",
+          "title": "Biota"
+        }
       ]
     }
   ],
@@ -61,16 +89,62 @@
   "iso:use_limitation": "Attribution required per CC-BY-4.0; no warranty of fitness for any particular purpose.",
   "iso:supplemental_information": "Indicator values 251-254 are reserved sentinels (off-season, no-data, no-seasonality, no-cropland-or-grassland) and should be excluded from numerical analysis; see classification:classes on the data band for the full sentinel table.",
   "cube:dimensions": {
-    "x": {"type": "spatial", "axis": "x", "extent": [-180.0, 180.0], "reference_system": 4326, "description": "Longitude (WGS84)"},
-    "y": {"type": "spatial", "axis": "y", "extent": [-90.0, 90.0], "reference_system": 4326, "description": "Latitude (WGS84)"},
-    "time": {"type": "temporal", "extent": ["1984-01-01T00:00:00Z", null], "step": "P10D", "description": "Dekad"},
-    "SEASON": {"type": "categorical", "values": ["GS1", "GS2"], "description": "Growing Season"},
-    "LCT": {"type": "categorical", "values": ["LC-C", "LC-G"], "description": "Land Cover Type"}
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "extent": [
+        -180,
+        180
+      ],
+      "reference_system": 4326,
+      "description": "Longitude (WGS84)"
+    },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "extent": [
+        -90,
+        90
+      ],
+      "reference_system": 4326,
+      "description": "Latitude (WGS84)"
+    },
+    "time": {
+      "type": "temporal",
+      "extent": [
+        "1984-01-01T00:00:00Z",
+        null
+      ],
+      "step": "P10D",
+      "description": "Dekad"
+    },
+    "SEASON": {
+      "type": "categorical",
+      "values": [
+        "GS1",
+        "GS2"
+      ],
+      "description": "Growing Season"
+    },
+    "LCT": {
+      "type": "categorical",
+      "values": [
+        "LC-C",
+        "LC-G"
+      ],
+      "description": "Land Cover Type"
+    }
   },
   "cube:variables": {
     "asi-d": {
       "type": "data",
-      "dimensions": ["x", "y", "time", "SEASON", "LCT"],
+      "dimensions": [
+        "x",
+        "y",
+        "time",
+        "SEASON",
+        "LCT"
+      ],
       "description": "Agricultural Stress Index",
       "unit": "%",
       "nodata": 255,
@@ -80,7 +154,9 @@
   "renders": {
     "data": {
       "title": "Agricultural Stress Index",
-      "assets": ["data"],
+      "assets": [
+        "data"
+      ],
       "colormap_name": "ASI-D-G",
       "resampling": "nearest"
     }
@@ -96,21 +172,48 @@
       "href": "https://example.org/assets/asi-d-thumbnail.png",
       "type": "image/png",
       "title": "Graphic overview",
-      "roles": ["thumbnail"]
+      "roles": [
+        "thumbnail"
+      ]
     },
     "dimension-labels": {
       "href": "https://example.org/assets/asi-d-dimension-labels.json",
       "type": "application/json",
       "title": "Dimension label translations",
       "description": "Human-readable labels for the SEASON and LCT categorical members of cube:dimensions.",
-      "roles": ["metadata", "dimension-labels"]
+      "roles": [
+        "metadata",
+        "dimension-labels"
+      ]
     }
   },
   "links": [
-    {"rel": "self", "type": "application/json", "href": "https://example.org/stac/collections/ASI-D"},
-    {"rel": "root", "type": "application/json", "href": "https://example.org/stac/"},
-    {"rel": "items", "type": "application/geo+json", "href": "https://example.org/stac/collections/ASI-D/items"},
-    {"rel": "license", "type": "text/html", "title": "Creative Commons Attribution 4.0", "href": "https://creativecommons.org/licenses/by/4.0/"},
-    {"rel": "describedby", "type": "application/xml", "title": "Full metadata in ISO 19115 standard", "href": "https://example.org/iso/asi-d.xml"}
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "https://example.org/stac/collections/ASI-D"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://example.org/stac/"
+    },
+    {
+      "rel": "items",
+      "type": "application/geo+json",
+      "href": "https://example.org/stac/collections/ASI-D/items"
+    },
+    {
+      "rel": "license",
+      "type": "text/html",
+      "title": "Creative Commons Attribution 4.0",
+      "href": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "rel": "describedby",
+      "type": "application/xml",
+      "title": "Full metadata in ISO 19115 standard",
+      "href": "https://example.org/iso/asi-d.xml"
+    }
   ]
 }
