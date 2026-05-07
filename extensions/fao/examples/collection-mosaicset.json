@@ -7,11 +7,8 @@
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
     "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
     "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
     "https://stac-extensions.github.io/timestamps/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/datacube/v2.3.0/schema.json",
-    "https://stac-extensions.github.io/raster/v2.0.0/schema.json",
-    "https://stac-extensions.github.io/render/v2.0.0/schema.json"
+    "https://stac-extensions.github.io/datacube/v2.3.0/schema.json"
   ],
   "id": "L3-RSM-D.KOG",
   "title": "Relative Root Zone Soil Moisture — Dekadal — Koga, Ethiopia — 20m (WaPOR v3)",
