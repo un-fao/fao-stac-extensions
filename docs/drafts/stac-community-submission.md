@@ -229,45 +229,27 @@ standardization pathway).
 
 Title: **Proposal: `iso-to-stac` — STAC extension + ISO 19115 ↔ STAC mapping document**
 
+> **Important — GitHub Flavored Markdown rendering note**
+>
+> Do not hard-wrap paragraphs or list items below. GitHub renders
+> every single newline inside a paragraph or list item as a `<br>`,
+> which turns wrapped prose into a broken staircase. Each paragraph
+> and list item must be one physical line; the reader's viewport
+> handles word-wrap. Blank lines between blocks are still required.
+
 ```markdown
 Hi all,
 
-FAO is proposing `iso-to-stac` — a pair of artifacts that together let
-a STAC client read the full ISO 19115-1 metadata of a dataset without
-leaving STAC:
+FAO is proposing `iso-to-stac` — a pair of artifacts that together let a STAC client read the full ISO 19115-1 metadata of a dataset without leaving STAC:
 
-1. **A STAC extension** (12 `iso:*` fields) — contributed only where
-   no existing community extension covers the ISO concept (lineage
-   statement, MD_MaintenanceFrequencyCode, MD_RestrictionCode,
-   character-set / spatial-representation / presentation-form
-   codelists, etc.).
-2. **A mapping document** — a normative ISO 19115 ↔ STAC crosswalk
-   that maps every ISO 19115-1 field used by a representative producer
-   to its STAC location, preferring an existing community extension
-   wherever it covers the concept. The mapping references the upstream
-   sources (ISO 19115-1 / 19115-2 / 19139, the codelist registry, OGC
-   API - Records, pygeometa, GeoNetwork) and the community extensions
-   it relies on (`processing`, `scientific`, `themes`, `language`,
-   `timestamps`, `datacube`, `raster`, `classification`, `render`,
-   `alternate-assets`, `version`, `contacts`).
+1. **A STAC extension** (12 `iso:*` fields) — contributed only where no existing community extension covers the ISO concept (lineage statement, `MD_MaintenanceFrequencyCode`, `MD_RestrictionCode`, character-set / spatial-representation / presentation-form codelists, etc.).
+2. **A mapping document** — a normative ISO 19115 ↔ STAC crosswalk that maps every ISO 19115-1 field used by a representative producer to its STAC location, preferring an existing community extension wherever it covers the concept. The mapping references the upstream sources (ISO 19115-1 / 19115-2 / 19139, the codelist registry, OGC API - Records, pygeometa, GeoNetwork) and the community extensions it relies on (`processing`, `scientific`, `themes`, `language`, `timestamps`, `datacube`, `raster`, `classification`, `render`, `alternate-assets`, `version`, `contacts`).
 
-Why both are needed: a small extension on its own would describe only
-the leftover fields; a mapping document on its own would document a
-crosswalk no producer can implement losslessly. Together they cover
-the whole ISO 19115-1 surface FAO uses in production today.
+**Why both are needed:** a small extension on its own would describe only the leftover fields; a mapping document on its own would document a crosswalk no producer can implement losslessly. Together they cover the whole ISO 19115-1 surface FAO uses in production today.
 
-**Note on the sibling `fao` extension** in the same repo: alongside
-`iso-to-stac`, we ship an `fao` extension with FAO-specific
-identifiers (`fao:workspace`, `fao:product_id`, `fao:product_type`,
-`fao:layer_id`, `fao:item_code`, …). It is intentionally org-scoped
-and stays a **permanent custom extension — not part of this
-proposal**. We flag it only because every example in the repo carries
-both `fao:*` and `iso:*` fields together, so reviewers reading the
-examples will see them side by side. The pairing also serves as the
-real-world test bed for `iso-to-stac`: a production org-specific
-extension consuming the generic ISO mapping. The `iso-to-stac`
-proposal here is independent of `fao` and works for any ISO 19115
-producer.
+**Note on the sibling `fao` extension** in the same repo: alongside `iso-to-stac`, we ship an `fao` extension with FAO-specific identifiers (`fao:workspace`, `fao:product_id`, `fao:product_type`, `fao:layer_id`, `fao:item_code`, …). It is intentionally org-scoped and stays a **permanent custom extension — not part of this proposal**. We flag it only because every example in the repo carries both `fao:*` and `iso:*` fields together, so reviewers reading the examples will see them side by side. The pairing also serves as the real-world test bed for `iso-to-stac`: a production org-specific extension consuming the generic ISO mapping. The `iso-to-stac` proposal here is independent of `fao` and works for any ISO 19115 producer.
+
+### Links
 
 - **Repo:** https://github.com/un-fao/fao-stac-extensions
 - **Extension:** https://github.com/un-fao/fao-stac-extensions/tree/main/extensions/iso-to-stac
@@ -277,28 +259,18 @@ producer.
 - **Pilot deployment:** https://data.review.fao.org/geospatial/search/stac/
 - **Sibling `fao` extension** (not part of this proposal): https://github.com/un-fao/fao-stac-extensions/tree/main/extensions/fao
 
-Open questions we'd like community input on (full list in the
-submission doc in the repo):
+### Open questions for the community
 
-1. Should the mapping document live inside the extension repo (as it
-   does today), or should it be split out as a separate
-   `iso19115-to-stac` mapping spec that the extension references?
-2. Drop `iso:lineage_statement` and recommend `processing:lineage`
-   exclusively before v1.0? (The Processing extension explicitly cites
-   NASA's ISO lineage info as its source.)
-3. Schema-enumerate the ISO codelist values, or keep them as `string`
-   so ISO TC 211 codelist extensions don't trigger a schema bump?
-4. Profile separation — the FAO ISO 19115-1 profile (MANDATORY /
-   Needed / Optional tiers) is documented but not enforced by the
-   schema; is that the right shape, or should profile manifests live
-   in a separate schema family?
+(Full list in the submission doc in the repo.)
 
-Coordination with the OGC Metadata SWG (ISO TC 211 liaison) is running
-in parallel; coordination note in
-https://github.com/un-fao/fao-stac-extensions/blob/main/docs/drafts/ogc-metadata-coordination.md.
+1. Should the mapping document live inside the extension repo (as it does today), or should it be split out as a separate `iso19115-to-stac` mapping spec that the extension references?
+2. Drop `iso:lineage_statement` and recommend `processing:lineage` exclusively before v1.0? (The Processing extension explicitly cites NASA's ISO lineage info as its source.)
+3. Schema-enumerate the ISO codelist values, or keep them as `string` so ISO TC 211 codelist extensions don't trigger a schema bump?
+4. Profile separation — the FAO ISO 19115-1 profile (MANDATORY / Needed / Optional tiers) is documented but not enforced by the schema; is that the right shape, or should profile manifests live in a separate schema family?
 
-Happy to iterate on naming, scope, and field set before we open a PR
-to the stac-extensions/ org.
+Coordination with the OGC Metadata SWG (ISO TC 211 liaison) is running in parallel; coordination note at <https://github.com/un-fao/fao-stac-extensions/blob/main/docs/drafts/ogc-metadata-coordination.md>.
+
+Happy to iterate on naming, scope, and field set before we open a PR to the `stac-extensions/` org.
 
 Thanks,
 FAO Agro-Informatics Platform team
