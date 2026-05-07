@@ -256,12 +256,26 @@ the leftover fields; a mapping document on its own would document a
 crosswalk no producer can implement losslessly. Together they cover
 the whole ISO 19115-1 surface FAO uses in production today.
 
+**Note on the sibling `fao` extension** in the same repo: alongside
+`iso-to-stac`, we ship an `fao` extension with FAO-specific
+identifiers (`fao:workspace`, `fao:product_id`, `fao:product_type`,
+`fao:layer_id`, `fao:item_code`, …). It is intentionally org-scoped
+and stays a **permanent custom extension — not part of this
+proposal**. We flag it only because every example in the repo carries
+both `fao:*` and `iso:*` fields together, so reviewers reading the
+examples will see them side by side. The pairing also serves as the
+real-world test bed for `iso-to-stac`: a production org-specific
+extension consuming the generic ISO mapping. The `iso-to-stac`
+proposal here is independent of `fao` and works for any ISO 19115
+producer.
+
 - **Repo:** https://github.com/un-fao/fao-stac-extensions
 - **Extension:** https://github.com/un-fao/fao-stac-extensions/tree/main/extensions/iso-to-stac
 - **Schema (interim URL):** https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json
 - **Mapping document:** https://github.com/un-fao/fao-stac-extensions/blob/main/extensions/iso-to-stac/mapping/iso19115-2-to-stac.md
 - **Reference implementation:** https://github.com/un-fao/fao-stac-extensions/tree/main/reference-implementation
 - **Pilot deployment:** https://data.review.fao.org/geospatial/search/stac/
+- **Sibling `fao` extension** (not part of this proposal): https://github.com/un-fao/fao-stac-extensions/tree/main/extensions/fao
 
 Open questions we'd like community input on (full list in the
 submission doc in the repo):
@@ -281,7 +295,7 @@ submission doc in the repo):
 
 Coordination with the OGC Metadata SWG (ISO TC 211 liaison) is running
 in parallel; coordination note in
-docs/drafts/ogc-metadata-coordination.md.
+https://github.com/un-fao/fao-stac-extensions/blob/main/docs/drafts/ogc-metadata-coordination.md.
 
 Happy to iterate on naming, scope, and field set before we open a PR
 to the stac-extensions/ org.
@@ -290,6 +304,6 @@ Thanks,
 FAO Agro-Informatics Platform team
 ```
 
-**This document is the submission package; the discussion body above
-is what gets posted manually by a maintainer to the STAC discussion
-forum.**
+**Posted as:** <https://github.com/radiantearth/stac-spec/discussions/1384>
+(Ideas category). This document is the submission package and is kept
+in sync with the live discussion body — update both together.
