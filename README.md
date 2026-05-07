@@ -44,7 +44,7 @@ extensions.
 
 ## Repository Layout
 
-```
+```text
 fao-stac-extensions/
 ├── extensions/
 │   ├── fao/                    # The fao extension (template-shaped)
@@ -111,4 +111,4 @@ pytest
 Apache-2.0. See [LICENSE](LICENSE).
 
 Copyright FAO, Viale delle Terme di Caracalla, 00100 Rome, Italy.
-Contact: copyright@fao.org — <http://fao.org/contact-us/terms/en/>.
+Contact: <copyright@fao.org> — <http://fao.org/contact-us/terms/en/>.

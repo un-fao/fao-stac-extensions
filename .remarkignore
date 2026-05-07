@@ -1,0 +1,9 @@
+# GitHub-special files (frontmatter, placeholders trip remark-lint)
+.github/
+
+# Auto-generated pytest cache
+**/.pytest_cache/
+
+# Mapping doc — content-heavy ISO ↔ STAC crosswalk; long table lines and
+# italic styling are intentional content choices, not formatting drift.
+extensions/iso-to-stac/mapping/iso19115-2-to-stac.md

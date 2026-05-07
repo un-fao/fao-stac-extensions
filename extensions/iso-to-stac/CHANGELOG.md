@@ -91,7 +91,7 @@ After reading the schemas of adjacent STAC extensions and STAC core's
   from GISMGR — those are not ISO ↔ STAC mappings, so they don't
   belong in this crosswalk. The platform identifier `gismgr_layer_id`
   is replaced by the typed `fao:layer_id` field documented in the
-  [`fao` extension](../../fao/), with the dual-emit deprecation pattern
+  [`fao` extension](../fao/), with the dual-emit deprecation pattern
   shown in that extension's examples.
 
 ### Deprecated
