@@ -21,5 +21,5 @@
 Field models and the `stac_extensions[]` URL contributor land in v0.2.0.
 """
 
-SCHEMA_URI = "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json"
+SCHEMA_URI = "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json"
 PREFIX = "fao"

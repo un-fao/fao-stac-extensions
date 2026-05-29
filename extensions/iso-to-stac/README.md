@@ -2,7 +2,7 @@
 
 - **Title:** ISO 19115-2 to STAC Mapping
 - **Identifier (interim):**
-  <https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json>
+  <https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json>
   Will move to `https://stac-extensions.github.io/iso-to-stac/...` when accepted upstream.
 - **Field Name Prefix:** iso
 - **Scope:** Item, Collection

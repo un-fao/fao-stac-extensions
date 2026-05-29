@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json#",
+  "$id": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json#",
   "title": "FAO Extension",
   "description": "FAO platform-specific fields for STAC Items and Collections published by the FAO Agro-Informatics Platform. Covers raster and vector products under one namespace.",
   "oneOf": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "$comment": "Schema for STAC Collections.",
+      "$comment": "Schema for STAC Collections. Each location is validated via allOf (not anyOf): a Collection carrying assets/item_assets/summaries could otherwise satisfy an anyOf branch without its top-level fao:* fields (or the raster/vector mutex) ever being validated. All fao:* fields are optional, so applying the field schema unconditionally at top-level rejects nothing legitimate.",
       "type": "object",
       "allOf": [
         {
@@ -36,15 +36,13 @@
           "properties": {"type": {"const": "Collection"}}
         },
         {"$ref": "#/definitions/stac_extensions"},
-        {"$ref": "#/definitions/modality_mutex"}
-      ],
-      "anyOf": [
+        {"$ref": "#/definitions/modality_mutex"},
         {
           "$comment": "Top-level Collection fields.",
           "$ref": "#/definitions/fields"
         },
         {
-          "required": ["assets"],
+          "$comment": "Fields in Collection assets (validated when present).",
           "properties": {
             "assets": {
               "type": "object",
@@ -53,17 +51,13 @@
           }
         },
         {
-          "required": ["item_assets"],
+          "$comment": "Fields in item_assets definitions (validated when present).",
           "properties": {
             "item_assets": {
               "type": "object",
               "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
-        },
-        {
-          "required": ["summaries"],
-          "properties": {"summaries": {"type": "object"}}
         }
       ]
     }
@@ -75,7 +69,7 @@
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {"const": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json"}
+          "contains": {"const": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json"}
         }
       }
     },
@@ -135,7 +129,16 @@
         },
         "fao:geometry_type": {
           "type": "string",
-          "description": "VECTOR ONLY. OGR/GeoJSON geometry type (e.g. \"Point\", \"LineString\", \"Polygon\", \"MultiPolygon\"). Raster collections MUST NOT set this field."
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "description": "VECTOR ONLY. GeoJSON (RFC 7946) geometry type. Raster collections MUST NOT set this field."
         },
         "fao:feature_count": {
           "type": "integer",

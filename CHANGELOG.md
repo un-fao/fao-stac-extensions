@@ -9,6 +9,23 @@ versioned CHANGELOG.
 
 ## [Unreleased]
 
+## [v0.3.0] — Extension schema typing + the post-v0.2.0 refinements
+
+v0.3.0 makes the `fao` and `iso-to-stac` field typing enforceable
+(issue #3): ISO 19115 codelist fields become closed enums, ISO date
+fields require RFC 3339 `date-time`, `fao:geometry_type` becomes a
+GeoJSON-type enum, `iso:lineage_statement` is deprecated in favour of
+`processing:lineage`, and both Collection branches were restructured
+from `anyOf` to `allOf` so top-level field typing is no longer bypassed
+by a Collection that also carries `assets`/`summaries`. Schema `$id`
+URLs are pinned to `v0.3.0`; the `v0.2.0` URLs remain resolvable at
+their immutable git tag for existing validators. Per-field detail is in
+the per-extension changelogs:
+[`iso-to-stac`](extensions/iso-to-stac/CHANGELOG.md) and
+[`fao`](extensions/fao/CHANGELOG.md). This release also folds in the
+community-file, documentation and example refinements staged after
+v0.2.0 (below).
+
 ### Added
 
 - Community files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` (adopting
@@ -147,6 +164,7 @@ versioned CHANGELOG.
 | Candidate | After PR to the `stac-extensions/` org index |
 | Stable | After at least one external implementer adopts |
 
-[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...HEAD>
+[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.3.0...HEAD>
+[v0.3.0]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...v0.3.0>
 [v0.2.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.2.0>
 [v0.1.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.1.0>

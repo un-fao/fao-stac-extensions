@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json#",
+  "$id": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json#",
   "title": "ISO 19115-2 to STAC Mapping Extension",
   "description": "Defines the mapping from ISO 19115-2 metadata to STAC and adds iso:* fields for ISO concepts that have no equivalent in any existing STAC extension.",
   "oneOf": [
@@ -23,22 +23,20 @@
       ]
     },
     {
-      "$comment": "Schema for STAC Collections.",
+      "$comment": "Schema for STAC Collections. Each location is validated via allOf (not anyOf): a Collection carrying assets/item_assets/summaries could otherwise satisfy an anyOf branch without its top-level iso:* fields ever being validated, leaving the field typing cosmetic. All iso:* fields are optional, so applying the field schema unconditionally at top-level rejects nothing legitimate.",
       "type": "object",
       "allOf": [
         {
           "required": ["type"],
           "properties": {"type": {"const": "Collection"}}
         },
-        {"$ref": "#/definitions/stac_extensions"}
-      ],
-      "anyOf": [
+        {"$ref": "#/definitions/stac_extensions"},
         {
           "$comment": "Top-level Collection fields.",
           "$ref": "#/definitions/fields"
         },
         {
-          "required": ["assets"],
+          "$comment": "Fields in Collection assets (validated when present).",
           "properties": {
             "assets": {
               "type": "object",
@@ -47,18 +45,12 @@
           }
         },
         {
-          "required": ["item_assets"],
+          "$comment": "Fields in item_assets definitions (validated when present).",
           "properties": {
             "item_assets": {
               "type": "object",
               "additionalProperties": {"$ref": "#/definitions/fields"}
             }
-          }
-        },
-        {
-          "required": ["summaries"],
-          "properties": {
-            "summaries": {"type": "object"}
           }
         }
       ]
@@ -71,9 +63,150 @@
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {"const": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json"}
+          "contains": {"const": "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json"}
         }
       }
+    },
+    "MD_RestrictionCode": {
+      "$comment": "ISO 19115-1 MD_RestrictionCode codelist (https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_RestrictionCode).",
+      "type": "string",
+      "enum": [
+        "copyright",
+        "patent",
+        "patentPending",
+        "trademark",
+        "license",
+        "intellectualPropertyRights",
+        "restricted",
+        "otherRestrictions",
+        "unrestricted",
+        "licenseUnrestricted",
+        "licenseEndUser",
+        "licenseDistributor",
+        "private",
+        "statutory",
+        "confidential",
+        "sensitiveButUnclassified",
+        "in-confidence"
+      ]
+    },
+    "MD_ProgressCode": {
+      "$comment": "ISO 19115-1 MD_ProgressCode codelist.",
+      "type": "string",
+      "enum": [
+        "completed",
+        "historicalArchive",
+        "obsolete",
+        "onGoing",
+        "planned",
+        "required",
+        "underDevelopment",
+        "final",
+        "pending",
+        "retired",
+        "superseded",
+        "tentative",
+        "valid",
+        "accepted",
+        "notAccepted",
+        "withdrawn",
+        "proposed",
+        "deprecated"
+      ]
+    },
+    "MD_SpatialRepresentationTypeCode": {
+      "$comment": "ISO 19115-1 MD_SpatialRepresentationTypeCode codelist.",
+      "type": "string",
+      "enum": [
+        "vector",
+        "grid",
+        "textTable",
+        "tin",
+        "stereoModel",
+        "video"
+      ]
+    },
+    "MD_MaintenanceFrequencyCode": {
+      "$comment": "ISO 19115-1 MD_MaintenanceFrequencyCode codelist.",
+      "type": "string",
+      "enum": [
+        "continual",
+        "daily",
+        "weekly",
+        "fortnightly",
+        "monthly",
+        "quarterly",
+        "biannually",
+        "annually",
+        "asNeeded",
+        "irregular",
+        "notPlanned",
+        "unknown",
+        "periodic",
+        "semimonthly",
+        "biennially"
+      ]
+    },
+    "CI_PresentationFormCode": {
+      "$comment": "ISO 19115-1 CI_PresentationFormCode codelist. Includes the digital, hardcopy, audio, multimedia, physical-object and diagram members.",
+      "type": "string",
+      "enum": [
+        "documentDigital",
+        "documentHardcopy",
+        "imageDigital",
+        "imageHardcopy",
+        "mapDigital",
+        "mapHardcopy",
+        "modelDigital",
+        "modelHardcopy",
+        "profileDigital",
+        "profileHardcopy",
+        "tableDigital",
+        "tableHardcopy",
+        "videoDigital",
+        "videoHardcopy",
+        "audioDigital",
+        "audioHardcopy",
+        "multimediaDigital",
+        "multimediaHardcopy",
+        "physicalObject",
+        "diagramDigital",
+        "diagramHardcopy"
+      ]
+    },
+    "MD_CharacterSetCode": {
+      "$comment": "ISO 19115 MD_CharacterSetCode codelist. Note: the canonical member for US-ASCII is `usAscii` (not `ascii`).",
+      "type": "string",
+      "enum": [
+        "ucs2",
+        "ucs4",
+        "utf7",
+        "utf8",
+        "utf16",
+        "8859part1",
+        "8859part2",
+        "8859part3",
+        "8859part4",
+        "8859part5",
+        "8859part6",
+        "8859part7",
+        "8859part8",
+        "8859part9",
+        "8859part10",
+        "8859part11",
+        "8859part13",
+        "8859part14",
+        "8859part15",
+        "8859part16",
+        "jis",
+        "shiftJIS",
+        "eucJP",
+        "usAscii",
+        "ebcdic",
+        "eucKR",
+        "big5",
+        "GB2312"
+      ]
     },
     "fields": {
       "$comment": "All iso:* fields are optional at the schema level. Required-ness is set by the profile (see README), not by the schema.",
@@ -81,51 +214,56 @@
       "properties": {
        "iso:data_creation_date": {
          "type": "string",
-         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [creation]. Event used for reference date (creation)."
+         "format": "date-time",
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [creation]. Event used for reference date (creation). RFC 3339 date-time (e.g. 2014-01-01T00:00:00Z); aligns with STAC `datetime`. Pad partial dates: `2014` -> `2014-01-01T00:00:00Z`. Omit the field when the date is unknown (do not send the string \"null\")."
        },
          "iso:data_revision_date": {
          "type": "string",
-         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [revision]. Event used for reference date (revision)."
+         "format": "date-time",
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [revision]. Event used for reference date (revision). RFC 3339 date-time; same shape and migration as iso:data_creation_date."
        },
          "iso:data_publication_date": {
          "type": "string",
-         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [publication]. Event used for reference date (publication)."
+         "format": "date-time",
+         "description": "ISO 19115-1 MD_DataIdentification.citation.CI_Date.date [publication]. Event used for reference date (publication). RFC 3339 date-time; same shape and migration as iso:data_creation_date."
        },
         "iso:lineage_statement": {
           "type": "string",
-          "description": "ISO 19115-1 MD_DataIdentification.resourceLineage.LI_Lineage.statement. A human-readable statement describing the data's lineage. NOTE: New producers SHOULD prefer `processing:lineage` from the STAC Processing extension, which explicitly cites NASA's ISO lineage information as its source. This iso:* field is retained as a fallback for FAO producers that need a strictly Collection-top-level field with an iso: prefix; it is a candidate for deprecation in a future release."
+          "deprecated": true,
+          "$comment": "DEPRECATED in v0.3.0. Prefer `processing:lineage` from the STAC Processing extension (https://github.com/stac-extensions/processing), which explicitly cites NASA's ISO lineage information as its source. Retained for one release as a fallback for FAO producers that need a strictly Collection-top-level field with an iso: prefix; scheduled for removal in a future release.",
+          "description": "ISO 19115-1 MD_DataIdentification.resourceLineage.LI_Lineage.statement. A human-readable statement describing the data's lineage. DEPRECATED: new producers SHOULD use `processing:lineage` from the STAC Processing extension instead."
         },
         "iso:maintenance_and_update_frequency": {
-          "type": "string",
-          "description": "ISO 19115-1 MD_MaintenanceInformation.maintenanceAndUpdateFrequency. MD_MaintenanceFrequencyCode codelist value (e.g. continual, daily, weekly, fortnightly, monthly, quarterly, biannually, annually, asNeeded, irregular, notPlanned, unknown, periodic, semimonthly, biennially)."
+          "description": "ISO 19115-1 MD_MaintenanceInformation.maintenanceAndUpdateFrequency. MD_MaintenanceFrequencyCode codelist value.",
+          "allOf": [{"$ref": "#/definitions/MD_MaintenanceFrequencyCode"}]
         },
         "iso:presentation_form": {
-          "type": "string",
-          "description": "ISO 19115-1 CI_Citation.presentationForm. CI_PresentationFormCode codelist value (e.g. mapDigital, documentDigital, imageDigital, profileDigital, modelDigital, tableDigital, videoDigital)."
+          "description": "ISO 19115-1 CI_Citation.presentationForm. CI_PresentationFormCode codelist value.",
+          "allOf": [{"$ref": "#/definitions/CI_PresentationFormCode"}]
         },
         "iso:character_set_code": {
-          "type": "string",
-          "description": "ISO 19115-1 MD_DataIdentification.characterSet. MD_CharacterSetCode codelist value (e.g. utf8, ucs2, ucs4, 8859part1, ebcdic, ascii)."
+          "description": "ISO 19115-1 MD_DataIdentification.characterSet. MD_CharacterSetCode codelist value.",
+          "allOf": [{"$ref": "#/definitions/MD_CharacterSetCode"}]
         },
         "iso:spatial_representation_type": {
-          "type": "string",
-          "description": "ISO 19115-1 MD_DataIdentification.spatialRepresentationType. MD_SpatialRepresentationTypeCode codelist value: vector, grid, textTable, tin, stereoModel, video."
+          "description": "ISO 19115-1 MD_DataIdentification.spatialRepresentationType. MD_SpatialRepresentationTypeCode codelist value.",
+          "allOf": [{"$ref": "#/definitions/MD_SpatialRepresentationTypeCode"}]
         },
         "iso:purpose": {
           "type": "string",
           "description": "ISO 19115-1 MD_DataIdentification.purpose. Free-text summary of the intended purpose of the resource."
         },
         "iso:status": {
-          "type": "string",
-          "description": "ISO 19115-1 MD_DataIdentification.status. MD_ProgressCode codelist value (e.g. completed, historicalArchive, obsolete, onGoing, planned, required, underDevelopment, final, pending, retired, superseded, tentative, valid, accepted, notAccepted, withdrawn, proposed, deprecated)."
+          "description": "ISO 19115-1 MD_DataIdentification.status. MD_ProgressCode codelist value.",
+          "allOf": [{"$ref": "#/definitions/MD_ProgressCode"}]
         },
         "iso:access_constraints": {
-          "type": "string",
-          "description": "ISO 19115-1 MD_LegalConstraints.accessConstraints. MD_RestrictionCode codelist value (e.g. copyright, patent, patentPending, trademark, license, intellectualPropertyRights, restricted, otherRestrictions, unrestricted, licenseUnrestricted, licenseEndUser, licenseDistributor, private, statutory, confidential, sensitiveButUnclassified, in-confidence)."
+          "description": "ISO 19115-1 MD_LegalConstraints.accessConstraints. MD_RestrictionCode codelist value.",
+          "allOf": [{"$ref": "#/definitions/MD_RestrictionCode"}]
         },
         "iso:use_constraints": {
-          "type": "string",
-          "description": "ISO 19115-1 MD_LegalConstraints.useConstraints. MD_RestrictionCode codelist value, same enumeration as iso:access_constraints."
+          "description": "ISO 19115-1 MD_LegalConstraints.useConstraints. MD_RestrictionCode codelist value, same enumeration as iso:access_constraints.",
+          "allOf": [{"$ref": "#/definitions/MD_RestrictionCode"}]
         },
         "iso:use_limitation": {
           "type": "string",

@@ -34,10 +34,20 @@ import json
 from pathlib import Path
 
 import pytest
-from jsonschema import Draft7Validator, ValidationError
+from jsonschema import Draft7Validator, FormatChecker, ValidationError
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 EXTENSIONS = REPO_ROOT / "extensions"
+
+# Enforce `format` assertions (e.g. the RFC 3339 `date-time` on iso:* date
+# fields). jsonschema only checks date-time when an RFC 3339 backend is
+# installed; `rfc3339-validator` is pulled in via the [dev] extra. Without a
+# format checker, format keywords are silently ignored.
+_FORMAT_CHECKER = FormatChecker()
+
+
+def _validator(schema: dict) -> Draft7Validator:
+    return Draft7Validator(schema, format_checker=_FORMAT_CHECKER)
 
 
 def _load(path: Path) -> dict:
@@ -71,7 +81,7 @@ def test_schema_is_valid_draft07(extension: str) -> None:
 def test_example_validates_against_schema(extension: str, example_path: Path) -> None:
     schema = _load(_schema_path(extension))
     example = _load(example_path)
-    Draft7Validator(schema).validate(example)
+    _validator(schema).validate(example)
 
 
 def test_fao_raster_vector_mutex_enforced() -> None:
@@ -85,7 +95,7 @@ def test_fao_raster_vector_mutex_enforced() -> None:
     bad["fao:feature_count"] = 42
 
     with pytest.raises(ValidationError):
-        Draft7Validator(schema).validate(bad)
+        _validator(schema).validate(bad)
 
 
 def test_fao_vector_only_document_validates() -> None:
@@ -99,4 +109,43 @@ def test_fao_vector_only_document_validates() -> None:
     vector["fao:geometry_type"] = "MultiPolygon"
     vector["fao:feature_count"] = 1234
 
-    Draft7Validator(schema).validate(vector)
+    _validator(schema).validate(vector)
+
+
+def test_iso_codelist_and_date_typing_enforced() -> None:
+    """v0.3.0 tightening (D1/D2): codelist enums and RFC 3339 date-time are
+    enforced at Collection top level even when the document also carries
+    assets/summaries. Under the v0.2.0 anyOf structure those siblings could
+    satisfy a branch on their own, leaving the top-level iso:* fields unchecked
+    — so this also guards the allOf restructuring that closed that bypass."""
+    schema = _load(_schema_path("iso-to-stac"))
+    url = schema["$id"].rstrip("#")
+
+    def collection(**fields: object) -> dict:
+        return {
+            "type": "Collection",
+            "stac_extensions": [url],
+            "assets": {},
+            "summaries": {},
+            **fields,
+        }
+
+    validator = _validator(schema)
+
+    # valid codelist value + RFC 3339 date-time pass
+    validator.validate(
+        collection(
+            **{
+                "iso:status": "completed",
+                "iso:data_creation_date": "2014-01-01T00:00:00Z",
+            }
+        )
+    )
+
+    # bad codelist value is rejected (D2)
+    with pytest.raises(ValidationError):
+        validator.validate(collection(**{"iso:status": "not-a-progress-code"}))
+
+    # partial / non-RFC-3339 date is rejected (D1)
+    with pytest.raises(ValidationError):
+        validator.validate(collection(**{"iso:data_creation_date": "2014"}))

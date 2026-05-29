@@ -28,7 +28,7 @@ def test_root_import():
 def test_fao_subpackage():
     from fao_stac_extensions import fao
 
-    assert fao.SCHEMA_URI == "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json"
+    assert fao.SCHEMA_URI == "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json"
     assert fao.PREFIX == "fao"
 
 
@@ -37,6 +37,6 @@ def test_iso_to_stac_subpackage():
 
     assert (
         iso_to_stac.SCHEMA_URI
-        == "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json"
+        == "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json"
     )
     assert iso_to_stac.PREFIX == "iso"
