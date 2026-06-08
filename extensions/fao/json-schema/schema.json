@@ -145,11 +145,6 @@
           "minimum": 0,
           "description": "VECTOR ONLY. Number of features in the layer (Collection level) or in the item (Item level). Raster collections MUST NOT set this field."
         }
-      },
-      "patternProperties": {
-        "^(?!fao:)": {
-          "$comment": "Allow any non-fao:-prefixed key to pass through (this extension co-exists with others)."
-        }
       }
     }
   }

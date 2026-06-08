@@ -96,9 +96,9 @@ identifiers under their original (un-prefixed) property names —
 notably `gismgr_item_id` on Items and `gismgr_layer_id` on Collections.
 This extension does **NOT** define those fields. Producers SHOULD
 emit them alongside the new typed `fao:*` fields during a deprecation
-window so existing consumers continue to work; the schema's
-`patternProperties` accepts any non-`fao:`-prefixed key, so the
-legacy fields validate without further configuration.
+window so existing consumers continue to work; the schema allows any
+additional property by default, so the legacy fields validate without
+further configuration.
 
 | Legacy (deprecated) | Replaced by | Replacement is |
 | --- | --- | --- |
@@ -108,6 +108,13 @@ legacy fields validate without further configuration.
 The worked examples emit both the legacy and the new fields to
 demonstrate the migration. Once consumers have been updated, the
 producer can drop the legacy keys.
+
+The schema relies on the JSON Schema default (`additionalProperties` is not
+set, so it implicitly allows any additional property). Producers that use this
+extension alongside others MUST list every co-deployed extension by URL in the
+`stac_extensions` array so validators can resolve and apply each extension's
+own field definitions. Do not rely on a wildcard pattern to pass through
+foreign-namespace fields — enumerate the extension instead.
 
 Other v1 custom fields (`styleCode`, `downloadUrl`, `gsutilUri`,
 `fileSize`, `flags`, `dimensions`, `additionalInfo`, etc.) were
