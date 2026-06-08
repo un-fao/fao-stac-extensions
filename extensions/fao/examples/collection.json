@@ -115,8 +115,8 @@
         "1984-01-01T00:00:00Z",
         null
       ],
-      "step": "P10D",
-      "description": "Dekad"
+      "step": null,
+      "description": "Dekad (irregular: third dekad runs day 21 to end-of-month)"
     },
     "SEASON": {
       "type": "categorical",
