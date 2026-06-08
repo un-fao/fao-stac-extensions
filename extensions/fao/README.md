@@ -1,7 +1,7 @@
 # FAO Extension Specification
 
 - **Title:** FAO
-- **Identifier:** <https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json>
+- **Identifier:** <https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json>
 - **Field Name Prefix:** fao
 - **Scope:** Item, Collection, Asset
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):**

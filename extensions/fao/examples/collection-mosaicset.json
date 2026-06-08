@@ -2,8 +2,8 @@
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json",
-    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json",
+    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json",
+    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json",
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
     "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
     "https://stac-extensions.github.io/language/v1.0.0/schema.json",

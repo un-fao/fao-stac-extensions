@@ -36,8 +36,8 @@ schemas validate cleanly via pystac. The full Node-side
 ``stac-node-validator`` run still validates against every declared
 extension.
 
-Until the v0.2.0 git tag is pushed to GitHub, the
-``raw.githubusercontent.com/.../v0.2.0/...`` URLs return 404, so we
+Until the v0.3.0 git tag is pushed to GitHub, the
+``raw.githubusercontent.com/.../v0.3.0/...`` URLs return 404, so we
 override pystac's schema fetcher to read the two FAO schemas from
 disk. Once the tag is published, the override has no effect.
 

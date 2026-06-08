@@ -39,8 +39,8 @@ extensions.
 
 | Extension | Field prefix | Status | Schema URL | Description |
 | --- | --- | --- | --- | --- |
-| [`fao`](extensions/fao/) | `fao` | **Custom** — org-specific, permanent (v0.2.0) | `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json` | FAO platform-specific fields applicable to both raster and vector products published by the FAO Agro-Informatics Platform. Not a candidate for the `stac-extensions/` org. |
-| [`iso-to-stac`](extensions/iso-to-stac/) | `iso` | Proposal — initial field set (v0.2.0); candidate for community acceptance | `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json` (interim) | Canonical mapping between ISO 19115-2 and STAC, plus the FAO ISO 19115-1 profile. Adds `iso:*` fields only where no existing extension covers the ISO concept. |
+| [`fao`](extensions/fao/) | `fao` | **Custom** — org-specific, permanent (v0.3.0) | `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json` | FAO platform-specific fields applicable to both raster and vector products published by the FAO Agro-Informatics Platform. Not a candidate for the `stac-extensions/` org. |
+| [`iso-to-stac`](extensions/iso-to-stac/) | `iso` | Proposal — initial field set (v0.3.0); candidate for community acceptance | `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json` (interim) | Canonical mapping between ISO 19115-2 and STAC, plus the FAO ISO 19115-1 profile. Adds `iso:*` fields only where no existing extension covers the ISO concept. |
 
 ## Repository Layout
 

@@ -7,8 +7,27 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ## [Unreleased]
 
+## [v0.3.0] — Codelist & date-time typing; deprecations
+
+This release tightens the schema so the field typing it documents is
+actually enforced (issue #3), alongside the mapping- and community-file
+refinements staged after v0.2.0.
+
 ### Added
 
+- **Codelist `$defs`** in `json-schema/schema.json`:
+  `MD_RestrictionCode`, `MD_ProgressCode`,
+  `MD_SpatialRepresentationTypeCode`, `MD_MaintenanceFrequencyCode`,
+  `CI_PresentationFormCode`, `MD_CharacterSetCode` — the canonical ISO
+  19115 codelist members, referenced from the matching `iso:*` fields.
+  `iso:access_constraints` and `iso:use_constraints` share one
+  `MD_RestrictionCode` enum by reference (closes #4).
+- `tests/test_examples.py` now enforces `format` (RFC 3339 `date-time`,
+  via `rfc3339-validator` added to the `[dev]` extra) and adds
+  `test_iso_codelist_and_date_typing_enforced` — a synthetic
+  counter-example proving the enum and date constraints are rejected at
+  Collection top level even when the document also carries
+  `assets`/`summaries`.
 - `iso:supplemental_information` field (Optional in the FAO profile)
   for `MD_DataIdentification.supplementalInformation`. The source
   spreadsheet recommended appending it to STAC `description`, which
@@ -54,16 +73,37 @@ After reading the schemas of adjacent STAC extensions and STAC core's
 
 ### Changed
 
-- Schema `$id` and `stac_extensions[]` URL moved from
-  `https://stac-extensions.github.io/iso-to-stac/v0.2.0/schema.json` to
-  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json`.
-  This is an **interim** URL served directly from the umbrella
-  repository's git tree at the release tag, used while the extension is
-  at the Proposal / Pilot phase. Once accepted into the
-  `stac-extensions/` org the `$id` will move to
+- **BREAKING — date fields require RFC 3339 `date-time` (#3 D1).**
+  `iso:data_creation_date`, `iso:data_revision_date` and
+  `iso:data_publication_date` previously accepted any string; they now
+  require a full RFC 3339 `date-time` (e.g. `2014-01-01T00:00:00Z`),
+  aligning with STAC `datetime` and giving indexers a stable `date`
+  mapping. *Migration:* pad partial dates
+  (`2014` → `2014-01-01T00:00:00Z`); omit the field when the date is
+  unknown — do not send the string `"null"`.
+- **BREAKING — codelist fields are closed enums (#3 D2, closes #4).**
+  `iso:status`, `iso:spatial_representation_type`,
+  `iso:maintenance_and_update_frequency`, `iso:character_set_code`,
+  `iso:presentation_form`, `iso:access_constraints` and
+  `iso:use_constraints` now validate against their ISO 19115 codelist
+  members instead of accepting free text, so typos fail validation.
+  *Migration:* the canonical US-ASCII member is `usAscii`, not `ascii`.
+- **BREAKING — Collection branch restructured to `allOf` so top-level
+  typing is enforced.** The v0.2.0 Collection schema combined the
+  top-level / `assets` / `item_assets` / `summaries` locations under
+  `anyOf`; a Collection carrying `assets` or `summaries` satisfied
+  another branch and its top-level `iso:*` fields were never validated,
+  leaving the typing cosmetic. The locations are now combined under
+  `allOf`, so the new date/enum constraints apply to every Collection.
+- Schema `$id` and `stac_extensions[]` URL bumped to
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json`
+  (was the `v0.2.0` path under the same host). This **interim** URL is
+  served directly from the umbrella repository's git tree at the
+  release tag while the extension is at the Proposal / Pilot phase;
+  once accepted into the `stac-extensions/` org the `$id` moves to
   `https://stac-extensions.github.io/iso-to-stac/...` in a subsequent
-  release. Until then, this URL is the one client libraries
-  dereference for schema validation.
+  release. The `v0.2.0` URL remains resolvable at its tag for existing
+  consumers.
 - **Mapping doc reshaped.** `mapping/iso19115-2-to-stac.md` is now
   organised by ISO 19115-1 section (Identification & Citation; Date;
   Maintenance / Status / Purpose; Constraints & Rights; Spatial &
@@ -95,6 +135,13 @@ After reading the schemas of adjacent STAC extensions and STAC core's
   shown in that extension's examples.
 
 ### Deprecated
+
+- **`iso:lineage_statement` (#3 D5).** Now flagged `deprecated: true`
+  with a `$comment` pointing to `processing:lineage` from the STAC
+  Processing extension (which cites NASA's ISO lineage information as
+  its source). Retained as a fallback for one release; scheduled for
+  removal in a future version. New producers SHOULD use
+  `processing:lineage`.
 
 ### Removed
 
@@ -145,6 +192,7 @@ After reading the schemas of adjacent STAC extensions and STAC core's
 - Placeholder JSON Schema, README field table, and example Item /
   Collection.
 
-[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...HEAD>
+[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.3.0...HEAD>
+[v0.3.0]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...v0.3.0>
 [v0.2.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.2.0>
 [v0.1.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.1.0>

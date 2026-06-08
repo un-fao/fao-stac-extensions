@@ -20,8 +20,8 @@ Actions), a markdown summary table is also appended there so the
 per-example status renders directly on the workflow run page instead
 of being buried in the job log.
 
-Until the v0.2.0 git tag is pushed to GitHub the
-``raw.githubusercontent.com/.../v0.2.0/...`` URLs return 404, so we
+Until the v0.3.0 git tag is pushed to GitHub the
+``raw.githubusercontent.com/.../v0.3.0/...`` URLs return 404, so we
 override pystac's schema fetcher to read the two FAO schemas from
 disk. Once the tag is published, the override has no effect.
 
@@ -50,9 +50,9 @@ REPO = Path(__file__).resolve().parent.parent
 GITHUB_STEP_SUMMARY = os.environ.get("GITHUB_STEP_SUMMARY")
 
 LOCAL_SCHEMAS = {
-    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json":
+    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json":
         REPO / "extensions/fao/json-schema/schema.json",
-    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/iso-to-stac/json-schema/schema.json":
+    "https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/iso-to-stac/json-schema/schema.json":
         REPO / "extensions/iso-to-stac/json-schema/schema.json",
 }
 FAO_OWNED_SCHEMA_URIS = frozenset(LOCAL_SCHEMAS)
@@ -161,7 +161,7 @@ if GITHUB_STEP_SUMMARY:
         "## pystac validation report",
         "",
         f"Repo at `{REPO.name}`. Schema URLs pinned to the release tag at "
-        "`raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/...`.",
+        "`raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/...`.",
         "",
         _markdown_table("Scoped pass — FAO-owned schemas", True, scoped),
         _markdown_table("Full-stack pass — every declared extension", False, full),

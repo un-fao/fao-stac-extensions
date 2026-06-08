@@ -7,8 +7,19 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ## [Unreleased]
 
+## [v0.3.0] — Field typing (geometry_type enum) + Collection-branch fix
+
+This release tightens the schema so the field typing it documents is
+actually enforced (issue #3), alongside the example/README refinements
+staged after v0.2.0.
+
 ### Added
 
+- `fao:geometry_type` is now a closed enum of the GeoJSON (RFC 7946)
+  geometry types — `Point`, `MultiPoint`, `LineString`,
+  `MultiLineString`, `Polygon`, `MultiPolygon`, `GeometryCollection`
+  (#3 D2). Previously any string; values outside the set now fail
+  validation.
 - Three additional worked examples covering the rest of the
   `fao:product_type` enum: `examples/collection-mosaic.json`
   (`L3-QUAL-NDVI-LT.LCE`), `examples/collection-mosaicset.json`
@@ -26,14 +37,21 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Changed
 
-- Schema `$id` and `stac_extensions[]` URL moved from
-  `https://stac-extensions.github.io/fao/v0.2.0/schema.json` to
-  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.2.0/extensions/fao/json-schema/schema.json`.
-  The `fao` extension is org-specific and will not be submitted to the
-  `stac-extensions/` org, so this URL is the **permanent** identifier;
-  the previous URL only resolved aspirationally and broke client-side
-  validation. The schema is served directly from the git tree at the
-  release tag — no separate publish workflow.
+- **BREAKING — Collection branch restructured to `allOf` so top-level
+  typing and the raster/vector mutex are enforced.** The v0.2.0
+  Collection schema combined the top-level / `assets` / `item_assets` /
+  `summaries` locations under `anyOf`; a Collection carrying `assets`
+  or `summaries` satisfied another branch and its top-level `fao:*`
+  fields were never validated. The locations are now combined under
+  `allOf`, so `fao:geometry_type`'s enum (and the existing
+  `modality_mutex`) apply to every Collection.
+- Schema `$id` and `stac_extensions[]` URL bumped to
+  `https://raw.githubusercontent.com/un-fao/fao-stac-extensions/v0.3.0/extensions/fao/json-schema/schema.json`
+  (was the `v0.2.0` path under the same host). The `fao` extension is
+  org-specific and will not be submitted to the `stac-extensions/`
+  org, so this raw-tree URL is the **permanent** identifier, served
+  directly from the git tree at the release tag — no separate publish
+  workflow. The `v0.2.0` URL remains resolvable at its tag.
 - All Item examples now carry `fao:product_type: "map"` to demonstrate
   the convention.
 - Worked examples now emit the legacy `gismgr_item_id` (Item) and
@@ -102,6 +120,7 @@ and this extension adheres to [Semantic Versioning](https://semver.org/spec/v2.0
 - Placeholder JSON Schema, README field table, and example Item /
   Collection.
 
-[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...HEAD>
+[Unreleased]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.3.0...HEAD>
+[v0.3.0]: <https://github.com/un-fao/fao-stac-extensions/compare/v0.2.0...v0.3.0>
 [v0.2.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.2.0>
 [v0.1.0]: <https://github.com/un-fao/fao-stac-extensions/releases/tag/v0.1.0>
