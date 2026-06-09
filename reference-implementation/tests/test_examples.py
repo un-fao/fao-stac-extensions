@@ -112,6 +112,64 @@ def test_fao_vector_only_document_validates() -> None:
     _validator(schema).validate(vector)
 
 
+def test_fao_summaries_typed_fields_enforced() -> None:
+    """D6: summaries for typed fao:* fields must contain arrays of valid enum values."""
+    schema = _load(_schema_path("fao"))
+    url = schema["$id"].rstrip("#")
+
+    def collection(**summaries: object) -> dict:
+        return {
+            "type": "Collection",
+            "stac_extensions": [url],
+            "summaries": summaries,
+        }
+
+    validator = _validator(schema)
+
+    # valid product_type summary
+    validator.validate(collection(**{"fao:product_type": ["mapset", "mosaic"]}))
+
+    # valid geometry_type summary
+    validator.validate(collection(**{"fao:geometry_type": ["Polygon"]}))
+
+    # invalid product_type value is rejected
+    with pytest.raises(ValidationError):
+        validator.validate(collection(**{"fao:product_type": ["not-a-product-type"]}))
+
+    # summaries value must be an array, not a scalar
+    with pytest.raises(ValidationError):
+        validator.validate(collection(**{"fao:product_type": "mapset"}))
+
+
+def test_iso_summaries_typed_fields_enforced() -> None:
+    """D6: summaries for typed iso:* fields must contain arrays of valid codelist values."""
+    schema = _load(_schema_path("iso-to-stac"))
+    url = schema["$id"].rstrip("#")
+
+    def collection(**summaries: object) -> dict:
+        return {
+            "type": "Collection",
+            "stac_extensions": [url],
+            "summaries": summaries,
+        }
+
+    validator = _validator(schema)
+
+    # valid iso:status summary
+    validator.validate(collection(**{"iso:status": ["completed", "onGoing"]}))
+
+    # valid iso:access_constraints summary
+    validator.validate(collection(**{"iso:access_constraints": ["license", "otherRestrictions"]}))
+
+    # bad codelist value in summaries is rejected
+    with pytest.raises(ValidationError):
+        validator.validate(collection(**{"iso:status": ["not-a-progress-code"]}))
+
+    # summaries value must be an array, not a scalar
+    with pytest.raises(ValidationError):
+        validator.validate(collection(**{"iso:access_constraints": "license"}))
+
+
 def test_iso_codelist_and_date_typing_enforced() -> None:
     """v0.3.0 tightening (D1/D2): codelist enums and RFC 3339 date-time are
     enforced at Collection top level even when the document also carries

@@ -52,6 +52,44 @@
               "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
+        },
+        {
+          "$comment": "Typed summaries: when an iso:* field appears in summaries its value must be an array of the same type as the scalar field. Uses the same $defs as the field definitions to avoid duplication. Other summaries keys are unconstrained.",
+          "properties": {
+            "summaries": {
+              "type": "object",
+              "properties": {
+                "iso:status": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/MD_ProgressCode"}
+                },
+                "iso:access_constraints": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/MD_RestrictionCode"}
+                },
+                "iso:use_constraints": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/MD_RestrictionCode"}
+                },
+                "iso:maintenance_and_update_frequency": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/MD_MaintenanceFrequencyCode"}
+                },
+                "iso:spatial_representation_type": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/MD_SpatialRepresentationTypeCode"}
+                },
+                "iso:presentation_form": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/CI_PresentationFormCode"}
+                },
+                "iso:character_set_code": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/MD_CharacterSetCode"}
+                }
+              }
+            }
+          }
         }
       ]
     }
@@ -276,11 +314,6 @@
         "iso:supplemental_information": {
           "type": "string",
           "description": "ISO 19115-1 MD_DataIdentification.supplementalInformation. Free-text supplemental information about the resource that does not fit elsewhere. Source spreadsheet recommended appending to STAC `description`; carrying it as a typed iso:* field preserves the ISO/STAC round-trip."
-        }
-      },
-      "patternProperties": {
-        "^(?!iso:)": {
-          "$comment": "Allow any non-iso:-prefixed key to pass through (this extension co-exists with others)."
         }
       }
     }

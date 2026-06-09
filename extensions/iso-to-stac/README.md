@@ -108,6 +108,15 @@ responsibility of the validator, not the extension. Schema-level
 `required: []` would prevent producers who comply with ISO but not the
 FAO profile from using the extension.
 
+## Co-deployment with other extensions
+
+The schema relies on the JSON Schema default (`additionalProperties` is not
+set, so it implicitly allows any additional property). Producers that use this
+extension alongside others MUST list every co-deployed extension by URL in the
+`stac_extensions` array so validators can resolve and apply each extension's
+own field definitions. Do not rely on a wildcard pattern to pass through
+foreign-namespace fields — enumerate the extension instead.
+
 ## Relation types
 
 This extension defines no new `rel` types. The link relations used by
