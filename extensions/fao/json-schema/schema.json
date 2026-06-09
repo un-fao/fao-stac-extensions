@@ -58,6 +58,31 @@
               "additionalProperties": {"$ref": "#/definitions/fields"}
             }
           }
+        },
+        {
+          "$comment": "Typed summaries: when a fao:* field appears in summaries its value must be an array of the same type as the scalar field. Other summaries keys are unconstrained.",
+          "properties": {
+            "summaries": {
+              "type": "object",
+              "properties": {
+                "fao:product_type": {
+                  "type": "array",
+                  "items": {"type": "string", "enum": ["mapset", "mosaic", "mosaicset", "map"]}
+                },
+                "fao:geometry_type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection"]
+                  }
+                },
+                "fao:workspace": {"type": "array", "items": {"type": "string"}},
+                "fao:product_id": {"type": "array", "items": {"type": "string"}},
+                "fao:layer_id": {"type": "array", "items": {"type": "string"}},
+                "fao:feature_count": {"type": "array", "items": {"type": "integer", "minimum": 0}}
+              }
+            }
+          }
         }
       ]
     }
